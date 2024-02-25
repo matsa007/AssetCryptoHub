@@ -13,9 +13,11 @@
 		49C301C42B8B9D6400BDAE9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C301C22B8B9D6400BDAE9E /* Main.storyboard */; };
 		49C301C62B8B9D6600BDAE9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C301C52B8B9D6600BDAE9E /* Assets.xcassets */; };
 		49C301C92B8B9D6600BDAE9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C301C72B8B9D6600BDAE9E /* LaunchScreen.storyboard */; };
+		646FE2F6CA31DD65C4987864 /* Pods_AssetCryptoHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00991A43C45615680D679D64 /* Pods-AssetCryptoHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.debug.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.debug.xcconfig"; sourceTree = "<group>"; };
 		49C301B92B8B9D6400BDAE9E /* AssetCryptoHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssetCryptoHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C301BC2B8B9D6400BDAE9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C301BE2B8B9D6400BDAE9E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		49C301C52B8B9D6600BDAE9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49C301C82B8B9D6600BDAE9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49C301CA2B8B9D6600BDAE9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetCryptoHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1F33273D8C52EECA31FB2BC /* Pods-AssetCryptoHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.release.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				646FE2F6CA31DD65C4987864 /* Pods_AssetCryptoHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				49C301BB2B8B9D6400BDAE9E /* AssetCryptoHub */,
 				49C301BA2B8B9D6400BDAE9E /* Products */,
+				8C40A283C45BA8ADE89D9CFD /* Pods */,
+				AA89727C26CBAC14C85B32B6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,23 @@
 			path = AssetCryptoHub;
 			sourceTree = "<group>";
 		};
+		8C40A283C45BA8ADE89D9CFD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				00991A43C45615680D679D64 /* Pods-AssetCryptoHub.debug.xcconfig */,
+				E1F33273D8C52EECA31FB2BC /* Pods-AssetCryptoHub.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AA89727C26CBAC14C85B32B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49C301CD2B8B9D6600BDAE9E /* Build configuration list for PBXNativeTarget "AssetCryptoHub" */;
 			buildPhases = (
+				05D099F8D37BE1779CC1B30D /* [CP] Check Pods Manifest.lock */,
 				49C301B52B8B9D6400BDAE9E /* Sources */,
 				49C301B62B8B9D6400BDAE9E /* Frameworks */,
 				49C301B72B8B9D6400BDAE9E /* Resources */,
+				5CAC3EFCB45E73867B4A9353 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05D099F8D37BE1779CC1B30D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AssetCryptoHub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CAC3EFCB45E73867B4A9353 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		49C301B52B8B9D6400BDAE9E /* Sources */ = {
@@ -203,7 +271,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -266,7 +334,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -287,6 +355,7 @@
 		};
 		49C301CE2B8B9D6600BDAE9E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00991A43C45615680D679D64 /* Pods-AssetCryptoHub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -315,6 +384,7 @@
 		};
 		49C301CF2B8B9D6600BDAE9E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F33273D8C52EECA31FB2BC /* Pods-AssetCryptoHub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
