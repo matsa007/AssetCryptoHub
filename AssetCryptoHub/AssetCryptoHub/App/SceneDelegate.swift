@@ -20,8 +20,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return vc
     }()
     
-    private let mainScreenInfoVC = MainCryptoInfoViewController()
-    private let portfolioVC = MainPortfolioViewController()
+    private let mainScreenInfoVC = UINavigationController(
+        rootViewController: MainCryptoInfoViewController()
+    )
+    private let portfolioVC = UINavigationController(
+        rootViewController: MainPortfolioViewController()
+    )
     
     // MARK: - Set view scene
 
