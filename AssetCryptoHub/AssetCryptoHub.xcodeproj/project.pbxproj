@@ -17,6 +17,7 @@
 		49C301E02B8BB0FD00BDAE9E /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301DF2B8BB0FD00BDAE9E /* ImageNames.swift */; };
 		49C301E22B8BBDDC00BDAE9E /* CellIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301E12B8BBDDC00BDAE9E /* CellIdentificators.swift */; };
 		49C301E42B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301E32B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift */; };
+		49C301E72B8BC95400BDAE9E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301E62B8BC95400BDAE9E /* NetworkManager.swift */; };
 		646FE2F6CA31DD65C4987864 /* Pods_AssetCryptoHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		49C301DF2B8BB0FD00BDAE9E /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
 		49C301E12B8BBDDC00BDAE9E /* CellIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentificators.swift; sourceTree = "<group>"; };
 		49C301E32B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeListTableViewCell.swift; sourceTree = "<group>"; };
+		49C301E62B8BC95400BDAE9E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetCryptoHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F33273D8C52EECA31FB2BC /* Pods-AssetCryptoHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.release.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 			children = (
 				49C301D22B8BAA9500BDAE9E /* App */,
 				49C301DA2B8BB08B00BDAE9E /* Constants */,
+				49C301E52B8BC92700BDAE9E /* Common */,
 				49C301D02B8BAA5E00BDAE9E /* CryptoInfo */,
 				49C301D12B8BAA8500BDAE9E /* Portfolio */,
 				49C301C52B8B9D6600BDAE9E /* Assets.xcassets */,
@@ -156,6 +159,14 @@
 				49C301E12B8BBDDC00BDAE9E /* CellIdentificators.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		49C301E52B8BC92700BDAE9E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				49C301E62B8BC95400BDAE9E /* NetworkManager.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		8C40A283C45BA8ADE89D9CFD /* Pods */ = {
@@ -290,6 +301,7 @@
 			files = (
 				49C301C12B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift in Sources */,
 				49C301BD2B8B9D6400BDAE9E /* AppDelegate.swift in Sources */,
+				49C301E72B8BC95400BDAE9E /* NetworkManager.swift in Sources */,
 				49C301E42B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift in Sources */,
 				49C301D92B8BADA900BDAE9E /* MainPortfolioViewController.swift in Sources */,
 				49C301E22B8BBDDC00BDAE9E /* CellIdentificators.swift in Sources */,
