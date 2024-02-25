@@ -21,6 +21,8 @@
 		49C301EA2B8BCD2C00BDAE9E /* ExchangeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301E92B8BCD2C00BDAE9E /* ExchangeInfoModel.swift */; };
 		49C301EC2B8BCD6100BDAE9E /* TickersDailyInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301EB2B8BCD6100BDAE9E /* TickersDailyInfoModel.swift */; };
 		49C301EE2B8BCD8E00BDAE9E /* KlinesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301ED2B8BCD8E00BDAE9E /* KlinesModel.swift */; };
+		49C301F02B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301EF2B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift */; };
+		49C301F22B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F12B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift */; };
 		646FE2F6CA31DD65C4987864 /* Pods_AssetCryptoHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		49C301E92B8BCD2C00BDAE9E /* ExchangeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeInfoModel.swift; sourceTree = "<group>"; };
 		49C301EB2B8BCD6100BDAE9E /* TickersDailyInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersDailyInfoModel.swift; sourceTree = "<group>"; };
 		49C301ED2B8BCD8E00BDAE9E /* KlinesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlinesModel.swift; sourceTree = "<group>"; };
+		49C301EF2B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCryptoInfoViewModel.swift; sourceTree = "<group>"; };
+		49C301F12B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCryptoInfoViewModelProtocol.swift; sourceTree = "<group>"; };
 		6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetCryptoHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F33273D8C52EECA31FB2BC /* Pods-AssetCryptoHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.release.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +149,8 @@
 		49C301D62B8BAAC500BDAE9E /* MainScreenViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				49C301F12B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift */,
+				49C301EF2B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift */,
 			);
 			path = MainScreenViewModels;
 			sourceTree = "<group>";
@@ -320,6 +326,7 @@
 				49C301BD2B8B9D6400BDAE9E /* AppDelegate.swift in Sources */,
 				49C301E72B8BC95400BDAE9E /* NetworkManager.swift in Sources */,
 				49C301EC2B8BCD6100BDAE9E /* TickersDailyInfoModel.swift in Sources */,
+				49C301F22B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift in Sources */,
 				49C301EE2B8BCD8E00BDAE9E /* KlinesModel.swift in Sources */,
 				49C301E42B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift in Sources */,
 				49C301D92B8BADA900BDAE9E /* MainPortfolioViewController.swift in Sources */,
@@ -328,6 +335,7 @@
 				49C301E02B8BB0FD00BDAE9E /* ImageNames.swift in Sources */,
 				49C301EA2B8BCD2C00BDAE9E /* ExchangeInfoModel.swift in Sources */,
 				49C301DE2B8BB0DE00BDAE9E /* ColorsSet.swift in Sources */,
+				49C301F02B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift in Sources */,
 				49C301DC2B8BB09D00BDAE9E /* Titles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
