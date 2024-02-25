@@ -21,7 +21,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
     
     private let mainScreenInfoVC = UINavigationController(
-        rootViewController: MainCryptoInfoViewController()
+        rootViewController: MainCryptoInfoViewController(
+            viewModel: MainCryptoInfoViewModel()
+        )
     )
     private let portfolioVC = UINavigationController(
         rootViewController: MainPortfolioViewController()

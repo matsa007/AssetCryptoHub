@@ -10,6 +10,10 @@ import SnapKit
 
 final class MainCryptoInfoViewController: UIViewController {
     
+    // MARK: - Parameters
+    
+    private let viewModel: MainCryptoInfoViewModelProtocol
+    
     // MARK: - GUI
     
     private lazy var searchBar: UISearchBar = {
@@ -35,12 +39,25 @@ final class MainCryptoInfoViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupLayout()
+        self.viewModel.readyForDisplay()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         self.view.layoutIfNeeded()
+    }
+    
+    // MARK: - Initialization
+    
+    init(viewModel: MainCryptoInfoViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
