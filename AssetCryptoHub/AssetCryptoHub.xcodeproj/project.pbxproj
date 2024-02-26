@@ -23,6 +23,16 @@
 		49C301EE2B8BCD8E00BDAE9E /* KlinesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301ED2B8BCD8E00BDAE9E /* KlinesModel.swift */; };
 		49C301F02B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301EF2B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift */; };
 		49C301F22B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F12B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift */; };
+		49C301F62B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F52B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift */; };
+		49C301F82B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F72B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift */; };
+		49C301FA2B8BF03D00BDAE9E /* ExchangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F92B8BF03D00BDAE9E /* ExchangeInfo.swift */; };
+		49C301FC2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FB2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift */; };
+		49C301FE2B8BF07900BDAE9E /* MainScreenChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FD2B8BF07900BDAE9E /* MainScreenChartData.swift */; };
+		49C302002B8BF0C700BDAE9E /* MainScreenDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FF2B8BF0C700BDAE9E /* MainScreenDisplayData.swift */; };
+		49C302022B8BF18D00BDAE9E /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C302012B8BF18D00BDAE9E /* Services.swift */; };
+		49C302042B8BF37D00BDAE9E /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C302032B8BF37D00BDAE9E /* ApiUrls.swift */; };
+		49C302062B8BF3CE00BDAE9E /* ChartIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C302052B8BF3CE00BDAE9E /* ChartIntervals.swift */; };
+		49C302092B8BF41200BDAE9E /* String+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C302082B8BF41200BDAE9E /* String+Ex.swift */; };
 		646FE2F6CA31DD65C4987864 /* Pods_AssetCryptoHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +56,16 @@
 		49C301ED2B8BCD8E00BDAE9E /* KlinesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlinesModel.swift; sourceTree = "<group>"; };
 		49C301EF2B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCryptoInfoViewModel.swift; sourceTree = "<group>"; };
 		49C301F12B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCryptoInfoViewModelProtocol.swift; sourceTree = "<group>"; };
+		49C301F52B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoInfoDataLoader.swift; sourceTree = "<group>"; };
+		49C301F72B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoInfoDataLoadable.swift; sourceTree = "<group>"; };
+		49C301F92B8BF03D00BDAE9E /* ExchangeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeInfo.swift; sourceTree = "<group>"; };
+		49C301FB2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingPairsDailyInfo.swift; sourceTree = "<group>"; };
+		49C301FD2B8BF07900BDAE9E /* MainScreenChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenChartData.swift; sourceTree = "<group>"; };
+		49C301FF2B8BF0C700BDAE9E /* MainScreenDisplayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenDisplayData.swift; sourceTree = "<group>"; };
+		49C302012B8BF18D00BDAE9E /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		49C302032B8BF37D00BDAE9E /* ApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
+		49C302052B8BF3CE00BDAE9E /* ChartIntervals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartIntervals.swift; sourceTree = "<group>"; };
+		49C302082B8BF41200BDAE9E /* String+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ex.swift"; sourceTree = "<group>"; };
 		6D59E835115B2F715A21FA02 /* Pods_AssetCryptoHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetCryptoHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F33273D8C52EECA31FB2BC /* Pods-AssetCryptoHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.release.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				49C301D22B8BAA9500BDAE9E /* App */,
+				49C302072B8BF40100BDAE9E /* Extensions */,
 				49C301DA2B8BB08B00BDAE9E /* Constants */,
 				49C301E52B8BC92700BDAE9E /* Common */,
 				49C301E82B8BCD0700BDAE9E /* Models */,
@@ -98,6 +119,7 @@
 		49C301D02B8BAA5E00BDAE9E /* CryptoInfo */ = {
 			isa = PBXGroup;
 			children = (
+				49C301F32B8BEF1300BDAE9E /* Services */,
 				49C301D32B8BAAA500BDAE9E /* MainScreen */,
 			);
 			path = CryptoInfo;
@@ -133,6 +155,10 @@
 		49C301D42B8BAAAE00BDAE9E /* MainScreenModels */ = {
 			isa = PBXGroup;
 			children = (
+				49C301F92B8BF03D00BDAE9E /* ExchangeInfo.swift */,
+				49C301FB2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift */,
+				49C301FD2B8BF07900BDAE9E /* MainScreenChartData.swift */,
+				49C301FF2B8BF0C700BDAE9E /* MainScreenDisplayData.swift */,
 			);
 			path = MainScreenModels;
 			sourceTree = "<group>";
@@ -170,6 +196,8 @@
 				49C301DB2B8BB09C00BDAE9E /* Titles.swift */,
 				49C301DF2B8BB0FD00BDAE9E /* ImageNames.swift */,
 				49C301E12B8BBDDC00BDAE9E /* CellIdentificators.swift */,
+				49C302032B8BF37D00BDAE9E /* ApiUrls.swift */,
+				49C302052B8BF3CE00BDAE9E /* ChartIntervals.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -190,6 +218,32 @@
 				49C301ED2B8BCD8E00BDAE9E /* KlinesModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		49C301F32B8BEF1300BDAE9E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				49C301F42B8BEF2200BDAE9E /* DataLoader */,
+				49C302012B8BF18D00BDAE9E /* Services.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		49C301F42B8BEF2200BDAE9E /* DataLoader */ = {
+			isa = PBXGroup;
+			children = (
+				49C301F72B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift */,
+				49C301F52B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift */,
+			);
+			path = DataLoader;
+			sourceTree = "<group>";
+		};
+		49C302072B8BF40100BDAE9E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				49C302082B8BF41200BDAE9E /* String+Ex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8C40A283C45BA8ADE89D9CFD /* Pods */ = {
@@ -323,18 +377,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C301C12B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift in Sources */,
+				49C302002B8BF0C700BDAE9E /* MainScreenDisplayData.swift in Sources */,
 				49C301BD2B8B9D6400BDAE9E /* AppDelegate.swift in Sources */,
+				49C302022B8BF18D00BDAE9E /* Services.swift in Sources */,
+				49C301F82B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift in Sources */,
 				49C301E72B8BC95400BDAE9E /* NetworkManager.swift in Sources */,
 				49C301EC2B8BCD6100BDAE9E /* TickersDailyInfoModel.swift in Sources */,
+				49C301FE2B8BF07900BDAE9E /* MainScreenChartData.swift in Sources */,
 				49C301F22B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift in Sources */,
+				49C301FA2B8BF03D00BDAE9E /* ExchangeInfo.swift in Sources */,
 				49C301EE2B8BCD8E00BDAE9E /* KlinesModel.swift in Sources */,
+				49C302092B8BF41200BDAE9E /* String+Ex.swift in Sources */,
 				49C301E42B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift in Sources */,
 				49C301D92B8BADA900BDAE9E /* MainPortfolioViewController.swift in Sources */,
 				49C301E22B8BBDDC00BDAE9E /* CellIdentificators.swift in Sources */,
 				49C301BF2B8B9D6400BDAE9E /* SceneDelegate.swift in Sources */,
 				49C301E02B8BB0FD00BDAE9E /* ImageNames.swift in Sources */,
 				49C301EA2B8BCD2C00BDAE9E /* ExchangeInfoModel.swift in Sources */,
+				49C302062B8BF3CE00BDAE9E /* ChartIntervals.swift in Sources */,
+				49C301FC2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift in Sources */,
+				49C301F62B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift in Sources */,
 				49C301DE2B8BB0DE00BDAE9E /* ColorsSet.swift in Sources */,
+				49C302042B8BF37D00BDAE9E /* ApiUrls.swift in Sources */,
 				49C301F02B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift in Sources */,
 				49C301DC2B8BB09D00BDAE9E /* Titles.swift in Sources */,
 			);
