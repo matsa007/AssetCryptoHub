@@ -66,4 +66,3 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.tabBarVC.selectedViewController = self.mainScreenInfoVC
     }
 }
-

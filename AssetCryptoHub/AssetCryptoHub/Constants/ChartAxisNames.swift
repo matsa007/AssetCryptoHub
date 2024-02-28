@@ -12,4 +12,3 @@ enum AxisNames {
     static let yAxis = "price"
     static let yAxisEnd = "minPrice"
 }
-
