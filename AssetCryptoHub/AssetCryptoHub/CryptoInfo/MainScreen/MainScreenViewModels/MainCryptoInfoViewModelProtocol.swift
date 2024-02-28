@@ -10,7 +10,21 @@ import Combine
 
 protocol MainCryptoInfoViewModelProtocol: AnyObject {
     var mainScreenDisplayData: [MainScreenDisplayData] { get set }
+    var filteredMainScreenDisplayData: [MainScreenDisplayData] { get set }
+    
     var anyMainScreenDisplayDataIsReadyForViewPublisher: AnyPublisher<Void, Never> { get }
+    var anyFilteredMainScreenDisplayDataIsUpdatedPublisher: AnyPublisher<Void, Never> { get }
+    var anySearchButtonTappedPublisher: AnyPublisher<Void, Never> { get }
+    var anySearchBarCancelButtonTappedPublisher: AnyPublisher<Void, Never> { get }
 
     func readyForDisplay()
+    func searchButtonTapped()
+    func searchBarCancelButtonTapped()
+    func filteredDisplayDataUpdating(searchedText: String)
+}
+
+extension MainCryptoInfoViewModelProtocol {
+    func clearFilteredDisplayData() {
+        self.filteredMainScreenDisplayData.removeAll()
+    }
 }

@@ -13,11 +13,28 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     // MARK: - Parameters
     
     var mainScreenDisplayData = [MainScreenDisplayData]()
+    var filteredMainScreenDisplayData = [MainScreenDisplayData]()
+
     private var cancellables: Set<AnyCancellable> = []
     
     private let mainScreenDisplayDataIsReadyForViewPublisher = PassthroughSubject<Void, Never>()
     var anyMainScreenDisplayDataIsReadyForViewPublisher: AnyPublisher<Void, Never> {
         self.mainScreenDisplayDataIsReadyForViewPublisher.eraseToAnyPublisher()
+    }
+    
+    private let filteredMainScreenDisplayDataIsUpdatedPublisher = PassthroughSubject<Void, Never>()
+    var anyFilteredMainScreenDisplayDataIsUpdatedPublisher: AnyPublisher<Void, Never> {
+        self.filteredMainScreenDisplayDataIsUpdatedPublisher.eraseToAnyPublisher()
+    }
+    
+    private let searchButtonTappedPublisher = PassthroughSubject<Void, Never>()
+    var anySearchButtonTappedPublisher: AnyPublisher<Void, Never> {
+        self.searchButtonTappedPublisher.eraseToAnyPublisher()
+    }
+    
+    private let searchBarCancelButtonTappedPublisher = PassthroughSubject<Void, Never>()
+    var anySearchBarCancelButtonTappedPublisher: AnyPublisher<Void, Never> {
+        self.searchBarCancelButtonTappedPublisher.eraseToAnyPublisher()
     }
     
     // MARK: - Initialization
@@ -30,6 +47,27 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     
     func readyForDisplay() {
         self.fetchExchangeData()
+    }
+    
+    // MARK: - User interaction
+    
+    func searchButtonTapped() {
+        self.searchButtonTappedPublisher.send()
+    }
+    
+    func searchBarCancelButtonTapped() {
+        self.searchBarCancelButtonTappedPublisher.send()
+    }
+    
+    // MARK: - Filtered display data updating
+    
+    func filteredDisplayDataUpdating(searchedText: String) {
+        self.mainScreenDisplayData.forEach { tradingPair in
+            if tradingPair.tradingPairName.uppercased().starts(with: searchedText.uppercased()) {
+                self.filteredMainScreenDisplayData.append(tradingPair)
+            }
+        }
+        self.filteredMainScreenDisplayDataIsUpdatedPublisher.send()
     }
 }
 

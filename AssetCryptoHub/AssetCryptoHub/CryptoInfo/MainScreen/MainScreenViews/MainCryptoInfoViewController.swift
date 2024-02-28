@@ -129,7 +129,33 @@ private extension MainCryptoInfoViewController {
         self.bindOutput()
     }
     
-    func bindInput() {}
+    func bindInput() {
+        let _: () = NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: self.searchBar.searchTextField)
+            .receive(on: DispatchQueue.main)
+            .map { ($0.object as? UITextField)?.text  ?? "" }
+            .sink { [weak self] searchedText in
+                guard let self else { return }
+                self.handleSearchBarTextChanged(searchedText)
+            }
+            .store(in: &self.cancellables)
+        
+        self.viewModel.anySearchButtonTappedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.handleSearchButtonTapped()
+            }
+            .store(in: &self.cancellables)
+        
+        self.viewModel.anySearchBarCancelButtonTappedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.handleSearchBarCancelButtonTapped()
+            }
+            .store(in: &self.cancellables)
+    }
     
     func bindOutput() {
         self.viewModel.anyMainScreenDisplayDataIsReadyForViewPublisher
@@ -139,14 +165,41 @@ private extension MainCryptoInfoViewController {
                 self.exchangeListTableView.reloadData()
             }
             .store(in: &self.cancellables)
+        
+        self.viewModel.anyFilteredMainScreenDisplayDataIsUpdatedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.exchangeListTableView.reloadData()
+            }
+            .store(in: &self.cancellables)
     }
 }
 
-// MARK: - Actions
+// MARK: - Actions and handlers
 
 private extension MainCryptoInfoViewController {
     @objc func searchButtonTapped() {
-        print("searchButtonTapped")
+        self.viewModel.searchButtonTapped()
+    }
+    
+    func handleSearchBarTextChanged(_ searchedText: String) {
+        self.viewModel.clearFilteredDisplayData()
+        self.exchangeListTableView.reloadData()
+        guard !searchedText.isEmpty else { return }
+        self.viewModel.filteredDisplayDataUpdating(searchedText: searchedText)
+    }
+    
+    func handleSearchButtonTapped() {
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.titleView = self.searchBar
+    }
+    
+    func handleSearchBarCancelButtonTapped() {
+        self.viewModel.clearFilteredDisplayData()
+        self.navigationItem.titleView = nil
+        self.setSearchItem()
+        self.exchangeListTableView.reloadData()
     }
 }
 
@@ -154,28 +207,44 @@ private extension MainCryptoInfoViewController {
 
 extension MainCryptoInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.mainScreenDisplayData.count
+        switch self.viewModel.filteredMainScreenDisplayData.isEmpty {
+        case true:
+            return self.viewModel.mainScreenDisplayData.count
+        case false:
+            return self.viewModel.filteredMainScreenDisplayData.count
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         self.view.frame.height / 15
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: CellIdentificators.mainCryptoInfo,
             for: indexPath
         ) as? ExchangeListTableViewCell else { return UITableViewCell() }
-        let tradePairDailyData = self.viewModel.mainScreenDisplayData[indexPath.row]
-        cell.setCellDisplayData(mainCryptoInfoDisplayDataModel: tradePairDailyData)
-        return cell
+        
+        switch self.viewModel.filteredMainScreenDisplayData.isEmpty {
+        case true:
+            let tradePairDailyData = self.viewModel.mainScreenDisplayData[indexPath.row]
+            cell.setCellDisplayData(mainCryptoInfoDisplayDataModel: tradePairDailyData)
+            return cell
+        case false:
+            let tradePairDailyData = self.viewModel.filteredMainScreenDisplayData[indexPath.row]
+            cell.setCellDisplayData(mainCryptoInfoDisplayDataModel: tradePairDailyData)
+            return cell
+        }
     }
 }
 
 // MARK: - UISearchBarDelegate
 
-extension MainCryptoInfoViewController: UISearchBarDelegate {}
-
+extension MainCryptoInfoViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.viewModel.searchBarCancelButtonTapped()
+    }
+}
 // MARK: - UITableViewDelegate
 
 extension MainCryptoInfoViewController: UITableViewDelegate {}
