@@ -9,5 +9,8 @@ import Foundation
 import Combine
 
 protocol MainCryptoInfoViewModelProtocol: AnyObject {
+    var mainScreenDisplayData: [MainScreenDisplayData] { get set }
+    var anyMainScreenDisplayDataIsReadyForViewPublisher: AnyPublisher<Void, Never> { get }
+
     func readyForDisplay()
 }
