@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		495716DB2B8FB58F00A0E15E /* FontParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716DA2B8FB58F00A0E15E /* FontParameters.swift */; };
+		495716DD2B8FB7F600A0E15E /* TradingPairMiniChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716DC2B8FB7F600A0E15E /* TradingPairMiniChartView.swift */; };
+		495716DF2B8FB84600A0E15E /* ChartAxisNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716DE2B8FB84600A0E15E /* ChartAxisNames.swift */; };
 		49C301BD2B8B9D6400BDAE9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301BC2B8B9D6400BDAE9E /* AppDelegate.swift */; };
 		49C301BF2B8B9D6400BDAE9E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301BE2B8B9D6400BDAE9E /* SceneDelegate.swift */; };
 		49C301C12B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301C02B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift */; };
@@ -38,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		00991A43C45615680D679D64 /* Pods-AssetCryptoHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.debug.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.debug.xcconfig"; sourceTree = "<group>"; };
+		495716DA2B8FB58F00A0E15E /* FontParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontParameters.swift; sourceTree = "<group>"; };
+		495716DC2B8FB7F600A0E15E /* TradingPairMiniChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingPairMiniChartView.swift; sourceTree = "<group>"; };
+		495716DE2B8FB84600A0E15E /* ChartAxisNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAxisNames.swift; sourceTree = "<group>"; };
 		49C301B92B8B9D6400BDAE9E /* AssetCryptoHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssetCryptoHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C301BC2B8B9D6400BDAE9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C301BE2B8B9D6400BDAE9E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 			children = (
 				49C301C02B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift */,
 				49C301E32B8BBEA900BDAE9E /* ExchangeListTableViewCell.swift */,
+				495716DC2B8FB7F600A0E15E /* TradingPairMiniChartView.swift */,
 			);
 			path = MainScreenViews;
 			sourceTree = "<group>";
@@ -198,6 +205,8 @@
 				49C301E12B8BBDDC00BDAE9E /* CellIdentificators.swift */,
 				49C302032B8BF37D00BDAE9E /* ApiUrls.swift */,
 				49C302052B8BF3CE00BDAE9E /* ChartIntervals.swift */,
+				495716DA2B8FB58F00A0E15E /* FontParameters.swift */,
+				495716DE2B8FB84600A0E15E /* ChartAxisNames.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -395,11 +404,14 @@
 				49C301E02B8BB0FD00BDAE9E /* ImageNames.swift in Sources */,
 				49C301EA2B8BCD2C00BDAE9E /* ExchangeInfoModel.swift in Sources */,
 				49C302062B8BF3CE00BDAE9E /* ChartIntervals.swift in Sources */,
+				495716DD2B8FB7F600A0E15E /* TradingPairMiniChartView.swift in Sources */,
 				49C301FC2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift in Sources */,
 				49C301F62B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift in Sources */,
+				495716DF2B8FB84600A0E15E /* ChartAxisNames.swift in Sources */,
 				49C301DE2B8BB0DE00BDAE9E /* ColorsSet.swift in Sources */,
 				49C302042B8BF37D00BDAE9E /* ApiUrls.swift in Sources */,
 				49C301F02B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift in Sources */,
+				495716DB2B8FB58F00A0E15E /* FontParameters.swift in Sources */,
 				49C301DC2B8BB09D00BDAE9E /* Titles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
