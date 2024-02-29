@@ -14,6 +14,7 @@
 		495716E82B90C81D00A0E15E /* DetailedCryptoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716E72B90C81D00A0E15E /* DetailedCryptoInfoViewController.swift */; };
 		495716EA2B90C8C400A0E15E /* DetailedCryptoInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716E92B90C8C400A0E15E /* DetailedCryptoInfoViewModel.swift */; };
 		495716EC2B90C8D500A0E15E /* DetailedCryptoInfoViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716EB2B90C8D500A0E15E /* DetailedCryptoInfoViewModelProtocol.swift */; };
+		49A0C1A92B91194A00E81254 /* UIViewController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0C1A82B91194A00E81254 /* UIViewController+Ex.swift */; };
 		49C301BD2B8B9D6400BDAE9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301BC2B8B9D6400BDAE9E /* AppDelegate.swift */; };
 		49C301BF2B8B9D6400BDAE9E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301BE2B8B9D6400BDAE9E /* SceneDelegate.swift */; };
 		49C301C12B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301C02B8B9D6400BDAE9E /* MainCryptoInfoViewController.swift */; };
@@ -51,6 +52,7 @@
 		495716E72B90C81D00A0E15E /* DetailedCryptoInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCryptoInfoViewController.swift; sourceTree = "<group>"; };
 		495716E92B90C8C400A0E15E /* DetailedCryptoInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCryptoInfoViewModel.swift; sourceTree = "<group>"; };
 		495716EB2B90C8D500A0E15E /* DetailedCryptoInfoViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCryptoInfoViewModelProtocol.swift; sourceTree = "<group>"; };
+		49A0C1A82B91194A00E81254 /* UIViewController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ex.swift"; sourceTree = "<group>"; };
 		49C301B92B8B9D6400BDAE9E /* AssetCryptoHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssetCryptoHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C301BC2B8B9D6400BDAE9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C301BE2B8B9D6400BDAE9E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,15 @@
 			path = DetailedScreenModels;
 			sourceTree = "<group>";
 		};
+		49A0C1A72B91193A00E81254 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				49A0C1A82B91194A00E81254 /* UIViewController+Ex.swift */,
+			);
+			name = Extensions;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		49C301B02B8B9D6400BDAE9E = {
 			isa = PBXGroup;
 			children = (
@@ -158,7 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				49C301D22B8BAA9500BDAE9E /* App */,
-				49C302072B8BF40100BDAE9E /* Extensions */,
+				49A0C1A72B91193A00E81254 /* Extensions */,
 				49C301DA2B8BB08B00BDAE9E /* Constants */,
 				49C301E52B8BC92700BDAE9E /* Common */,
 				49C301E82B8BCD0700BDAE9E /* Models */,
@@ -295,13 +306,6 @@
 				49C301F52B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift */,
 			);
 			path = DataLoader;
-			sourceTree = "<group>";
-		};
-		49C302072B8BF40100BDAE9E /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8C40A283C45BA8ADE89D9CFD /* Pods */ = {
@@ -459,6 +463,7 @@
 				495716DF2B8FB84600A0E15E /* ChartAxisNames.swift in Sources */,
 				49C301DE2B8BB0DE00BDAE9E /* ColorsSet.swift in Sources */,
 				49C302042B8BF37D00BDAE9E /* ApiUrls.swift in Sources */,
+				49A0C1A92B91194A00E81254 /* UIViewController+Ex.swift in Sources */,
 				495716EC2B90C8D500A0E15E /* DetailedCryptoInfoViewModelProtocol.swift in Sources */,
 				49C301F02B8BCEF500BDAE9E /* MainCryptoInfoViewModel.swift in Sources */,
 				495716E22B90BCA300A0E15E /* CryptoInfoHelper.swift in Sources */,

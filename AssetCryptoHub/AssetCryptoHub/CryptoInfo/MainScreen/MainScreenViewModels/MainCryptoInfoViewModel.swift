@@ -42,6 +42,11 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
         self.selectedCellDetailedDataIsReadyPublisher.eraseToAnyPublisher()
     }
     
+    private let networkErrorAlertPublisher = PassthroughSubject<Error, Never>()
+    var anyNetworkErrorAlertPublisher: AnyPublisher<Error, Never> {
+        self.networkErrorAlertPublisher.eraseToAnyPublisher()
+    }
+    
     // MARK: - Initialization
     
     deinit {
@@ -95,11 +100,17 @@ private extension MainCryptoInfoViewModel {
         dataLoader.anyDisplayDataIsReadyForViewPublisher
             .sink { [weak self] data in
                 guard let self else { return }
-                self.mainScreenDisplayData = data
-                self.mainScreenDisplayDataIsReadyForViewPublisher.send()
+                self.handleDisplayData(for: data)
             }
             .store(in: &self.cancellables)
         
+        dataLoader.anyNetworkErrorMessagePublisher
+            .sink { [weak self] error in
+                guard let self else { return }
+                self.handleAlertForNetworkError(for: error)
+            }
+            .store(in: &self.cancellables)
+
         dataLoader.requestExchangeInfoData()
     }
     
@@ -130,6 +141,11 @@ private extension MainCryptoInfoViewModel {
 // MARK: - Handlers
 
 private extension MainCryptoInfoViewModel {
+    func handleDisplayData(for data: [MainScreenDisplayData]) {
+        self.mainScreenDisplayData = data
+        self.mainScreenDisplayDataIsReadyForViewPublisher.send()
+    }
+    
     func handleDetailedKlinesData(for detailedKlinesData: [KlinesModel], index: Int) {
         let services = Services()
 
@@ -159,5 +175,9 @@ private extension MainCryptoInfoViewModel {
             
             self.selectedCellDetailedDataIsReadyPublisher.send(detailedDisplayData)
         }
+    }
+    
+    func handleAlertForNetworkError(for error: Error) {
+        self.networkErrorAlertPublisher.send(error)
     }
 }

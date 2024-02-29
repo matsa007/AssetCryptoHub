@@ -11,6 +11,7 @@ import Combine
 protocol CryptoInfoDataLoadable: AnyObject {
     var anyDisplayDataIsReadyForViewPublisher: AnyPublisher<[MainScreenDisplayData], Never> { get }
     var anyDetailedKlinesDataIsReadyForViewPublisher: AnyPublisher<[KlinesModel], Never> { get }
+    var anyNetworkErrorMessagePublisher: AnyPublisher<Error, Never> { get }
     
     func requestExchangeInfoData()
     func requestTraidingPairsDailyInfoData(_ traidingPairsList: [ExhangeInfo]) async

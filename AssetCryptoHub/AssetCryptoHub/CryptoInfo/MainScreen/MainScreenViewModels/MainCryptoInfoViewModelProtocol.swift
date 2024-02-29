@@ -17,6 +17,7 @@ protocol MainCryptoInfoViewModelProtocol: AnyObject {
     var anySearchButtonTappedPublisher: AnyPublisher<Void, Never> { get }
     var anySearchBarCancelButtonTappedPublisher: AnyPublisher<Void, Never> { get }
     var anySelectedCellDetailedDataIsReadyPublisher: AnyPublisher<MainScreenDisplayData, Never> { get }
+    var anyNetworkErrorAlertPublisher: AnyPublisher<Error, Never> { get }
 
     func readyForDisplay()
     func searchButtonTapped()

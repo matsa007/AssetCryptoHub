@@ -181,6 +181,14 @@ private extension MainCryptoInfoViewController {
                 self.exchangeListTableView.reloadData()
             }
             .store(in: &self.cancellables)
+        
+        self.viewModel.anyNetworkErrorAlertPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                guard let self else { return }
+                self.handleShowErrorWithAlert(for: error)
+            }
+            .store(in: &self.cancellables)
     }
 }
 
@@ -217,6 +225,10 @@ private extension MainCryptoInfoViewController {
             )
         )
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleShowErrorWithAlert(for error: Error) {
+        self.alertForError(error)
     }
 }
 
