@@ -65,29 +65,16 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     }
     
     func tableViewRowSelected(index: Int) {
-        let dataLoader = CryptoInfoDataLoader()
-        var tradingPairName = ""
-
-        dataLoader.anyDetailedKlinesDataIsReadyForViewPublisher
-            .sink { [weak self] detailedKlinesData in
-                guard let self else { return }
-                self.handleDetailedKlinesData(
-                    for: detailedKlinesData,
-                    index: index
-                )
-            }
-            .store(in: &self.cancellables)
-        
         switch self.filteredMainScreenDisplayData.isEmpty {
         case true:
-            tradingPairName = self.mainScreenDisplayData[index].tradingPairName
-            self.fetchDetaikledKlinesData(for: tradingPairName)
+            let tradingPairName = self.mainScreenDisplayData[index].tradingPairName
+            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
         case false:
-            tradingPairName = self.filteredMainScreenDisplayData[index].tradingPairName
-            self.fetchDetaikledKlinesData(for: tradingPairName)
+            let tradingPairName = self.filteredMainScreenDisplayData[index].tradingPairName
+            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
         }
     }
-    
+
     // MARK: - Filtered display data updating
     
     func filteredDisplayDataUpdating(searchedText: String) {
@@ -116,9 +103,19 @@ private extension MainCryptoInfoViewModel {
         dataLoader.requestExchangeInfoData()
     }
     
-    func fetchDetaikledKlinesData(for tradingPairName: String) {
+    func fetchDetaikledKlinesData(for tradingPairName: String, index: Int) {
         let dataLoader = CryptoInfoDataLoader()
         let helper = CryptoInfoHelper()
+        
+        dataLoader.anyDetailedKlinesDataIsReadyForViewPublisher
+            .sink { [weak self] detailedKlinesData in
+                guard let self else { return }
+                self.handleDetailedKlinesData(
+                    for: detailedKlinesData,
+                    index: index
+                )
+            }
+            .store(in: &self.cancellables)
         
         dataLoader.requestDetailedKlinesData(
             interval: ChartIntervals.oneHour,
