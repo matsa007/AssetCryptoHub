@@ -155,6 +155,14 @@ private extension MainCryptoInfoViewController {
                 self.handleSearchBarCancelButtonTapped()
             }
             .store(in: &self.cancellables)
+        
+        self.viewModel.anySelectedCellDetailedDataIsReadyPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] selectedData in
+                guard let self else { return }
+                self.handleTableViewRowSelectedData(for: selectedData)
+            }
+            .store(in: &self.cancellables)
     }
     
     func bindOutput() {
@@ -200,6 +208,15 @@ private extension MainCryptoInfoViewController {
         self.navigationItem.titleView = nil
         self.setSearchItem()
         self.exchangeListTableView.reloadData()
+    }
+    
+    func handleTableViewRowSelectedData(for detailedData: MainScreenDisplayData) {
+        let vc = DetailedCryptoInfoViewController(
+            viewModel: DetailedCryptoInfoViewModel(
+                detailedData: detailedData
+            )
+        )
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -247,4 +264,8 @@ extension MainCryptoInfoViewController: UISearchBarDelegate {
 }
 // MARK: - UITableViewDelegate
 
-extension MainCryptoInfoViewController: UITableViewDelegate {}
+extension MainCryptoInfoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.viewModel.tableViewRowSelected(index: indexPath.row)
+    }
+}

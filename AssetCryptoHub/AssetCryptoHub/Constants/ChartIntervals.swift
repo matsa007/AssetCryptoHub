@@ -11,3 +11,8 @@ enum ChartIntervals {
     static let oneHour = "1h"
     static let oneMinute = "1m"
 }
+
+enum ChartRanges {
+    static let oneDayForOneHourLimit = 24
+    static let oneWeekForOneHourLimit = 168
+}
