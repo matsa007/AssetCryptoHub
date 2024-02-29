@@ -62,33 +62,21 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     // MARK: - User interaction
     
     func searchButtonTapped() {
-        self.searchButtonTappedPublisher.send()
+        self.handleSearchButtonTapped()
     }
     
     func searchBarCancelButtonTapped() {
-        self.searchBarCancelButtonTappedPublisher.send()
+        self.handleSearchBarCancelButtonTapped()
     }
     
     func tableViewRowSelected(index: Int) {
-        switch self.filteredMainScreenDisplayData.isEmpty {
-        case true:
-            let tradingPairName = self.mainScreenDisplayData[index].tradingPairName
-            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
-        case false:
-            let tradingPairName = self.filteredMainScreenDisplayData[index].tradingPairName
-            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
-        }
+        self.handleTableViewRowSelected(for: index)
     }
 
     // MARK: - Filtered display data updating
     
     func filteredDisplayDataUpdating(searchedText: String) {
-        self.mainScreenDisplayData.forEach { tradingPair in
-            if tradingPair.tradingPairName.uppercased().starts(with: searchedText.uppercased()) {
-                self.filteredMainScreenDisplayData.append(tradingPair)
-            }
-        }
-        self.filteredMainScreenDisplayDataIsUpdatedPublisher.send()
+        self.handleDisplayDataUpdating(with: searchedText)
     }
 }
 
@@ -138,12 +126,40 @@ private extension MainCryptoInfoViewModel {
     }
 }
 
-// MARK: - Handlers
+// MARK: - Handlers and actions
 
 private extension MainCryptoInfoViewModel {
     func handleDisplayData(for data: [MainScreenDisplayData]) {
         self.mainScreenDisplayData = data
         self.mainScreenDisplayDataIsReadyForViewPublisher.send()
+    }
+    
+    func handleSearchButtonTapped() {
+        self.searchButtonTappedPublisher.send()
+    }
+    
+    func handleDisplayDataUpdating(with searchedText: String) {
+        self.mainScreenDisplayData.forEach { tradingPair in
+            if tradingPair.tradingPairName.uppercased().starts(with: searchedText.uppercased()) {
+                self.filteredMainScreenDisplayData.append(tradingPair)
+            }
+        }
+        self.filteredMainScreenDisplayDataIsUpdatedPublisher.send()
+    }
+    
+    func handleSearchBarCancelButtonTapped() {
+        self.searchBarCancelButtonTappedPublisher.send()
+    }
+    
+    func handleTableViewRowSelected(for index: Int) {
+        switch self.filteredMainScreenDisplayData.isEmpty {
+        case true:
+            let tradingPairName = self.mainScreenDisplayData[index].tradingPairName
+            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
+        case false:
+            let tradingPairName = self.filteredMainScreenDisplayData[index].tradingPairName
+            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
+        }
     }
     
     func handleDetailedKlinesData(for detailedKlinesData: [KlinesModel], index: Int) {
