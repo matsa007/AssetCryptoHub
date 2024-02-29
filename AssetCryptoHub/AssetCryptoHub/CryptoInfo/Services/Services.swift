@@ -28,7 +28,7 @@ struct Services {
         return updatedTradePairsInfoList
     }
     
-    func createChartData(_ fetchedData: [KlinesModel], _ priceChanged: String) -> MainScreenChartData {
+    func createChartData(for fetchedData: [KlinesModel], with priceChanged: String) -> MainScreenChartData {
         var chartData = MainScreenChartData(
             minPrice: Double.greatestFiniteMagnitude,
             maxPrice: 0.0,
@@ -91,5 +91,14 @@ struct Services {
             updatedPrice += "0"
         }
         return updatedPrice
+    }
+    
+    func createDetailedDisplayData(for data: MainScreenDisplayData, and detailedChartData: MainScreenChartData) -> MainScreenDisplayData {
+        MainScreenDisplayData(
+            tradingPairName: data.tradingPairName,
+            tradingPairChartData: detailedChartData,
+            tradingPairPrice: data.tradingPairPrice,
+            tradingPairPriceDailyChangeInPercents: data.tradingPairPriceDailyChangeInPercents,
+            tradingPairPriceIsRaised: detailedChartData.isRaised)
     }
 }

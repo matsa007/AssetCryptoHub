@@ -71,8 +71,9 @@ extension CryptoInfoDataLoader {
                     )
                     
                     do {
+                        let helper = CryptoInfoHelper()
                         let responseData: TickersDailyInfoModel = try await NetworkManager.shared.requestData(
-                            toEndPoint: ApiUrls.binanceTickerDailyChangeInfo.createBinanceTradePairDailyInfoApiURL(tradePairSymbol: tradePair.symbol),
+                            toEndPoint: helper.createUrlForBinanceTradePairDailyInfo(for: tradePair.symbol),
                             httpMethod: .get
                         )
                         dailyInfo = TradingPairsDailyInfo(
@@ -117,7 +118,7 @@ extension CryptoInfoDataLoader {
             await self.requestKlinesData(
                 tradingPairsDailyInfo: tradingPairsDailyInfo,
                 interval: ChartIntervals.oneHour,
-                limit: 24
+                limit: ChartRanges.oneDayForOneHourLimit
             )
         }
     }
@@ -140,20 +141,20 @@ extension CryptoInfoDataLoader {
                         tradingPairPriceIsRaised: false)
                     
                     do {
+                        let helper = CryptoInfoHelper()
                         let responseData: [KlinesModel] = try await NetworkManager.shared.requestData(
-                            toEndPoint: ApiUrls.binanceKlines.createBinanceKlinesApiURL(
-                                symbol: tradePairInfo.symbol,
-                                interval: interval,
-                                limit: limit
-                            ),
+                            toEndPoint: helper.createBinanceKlinesApiURL(for: tradePairInfo.symbol, interval: interval, limit: limit),
                             httpMethod: .get
                         )
-                        let chartData = services.createChartData(responseData, tradePairInfo.priceChangePercent)
+                        let chartData = services.createChartData(for: responseData, with: tradePairInfo.priceChangePercent)
                         displayData = MainScreenDisplayData(
-                            tradingPairName: tradePairInfo.baseAsset.createTradePairViewName(quoteAsset: tradePairInfo.quoteAsset),
+                            tradingPairName: helper.createTradePairViewName(
+                                for: tradePairInfo.baseAsset,
+                                and: tradePairInfo.quoteAsset
+                            ),
                             tradingPairChartData: chartData,
                             tradingPairPrice: services.updatePrice(tradePairInfo.lastPrice),
-                            tradingPairPriceDailyChangeInPercents: tradePairInfo.priceChangePercent.addPercentSign(),
+                            tradingPairPriceDailyChangeInPercents: helper.addPercentSign(for: tradePairInfo.priceChangePercent),
                             tradingPairPriceIsRaised: chartData.isRaised)
                     }
                     
@@ -183,9 +184,10 @@ extension CryptoInfoDataLoader {
     func requestDetailedKlinesData(interval: String, limit: Int, tradePairName: String) {
         Task {
             do {
+                let helper = CryptoInfoHelper()
                 let responseData: [KlinesModel] = try await NetworkManager.shared.requestData(
-                    toEndPoint: ApiUrls.binanceKlines.createBinanceKlinesApiURL(
-                        symbol: tradePairName,
+                    toEndPoint: helper.createBinanceKlinesApiURL(
+                        for: tradePairName,
                         interval: interval,
                         limit: limit
                     ),

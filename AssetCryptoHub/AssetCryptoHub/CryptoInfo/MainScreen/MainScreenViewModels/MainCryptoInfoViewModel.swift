@@ -37,13 +37,18 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
         self.searchBarCancelButtonTappedPublisher.eraseToAnyPublisher()
     }
     
+    private let selectedCellDetailedDataIsReadyPublisher = PassthroughSubject<MainScreenDisplayData, Never>()
+    var anySelectedCellDetailedDataIsReadyPublisher: AnyPublisher<MainScreenDisplayData, Never> {
+        self.selectedCellDetailedDataIsReadyPublisher.eraseToAnyPublisher()
+    }
+    
     // MARK: - Initialization
     
     deinit {
         self.cancellables.forEach { $0.cancel() }
     }
     
-    // MARK: - Fetch data
+    // MARK: - Data loading
     
     func readyForDisplay() {
         self.fetchExchangeData()
@@ -59,6 +64,30 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
         self.searchBarCancelButtonTappedPublisher.send()
     }
     
+    func tableViewRowSelected(index: Int) {
+        let dataLoader = CryptoInfoDataLoader()
+        var tradingPairName = ""
+
+        dataLoader.anyDetailedKlinesDataIsReadyForViewPublisher
+            .sink { [weak self] detailedKlinesData in
+                guard let self else { return }
+                self.handleDetailedKlinesData(
+                    for: detailedKlinesData,
+                    index: index
+                )
+            }
+            .store(in: &self.cancellables)
+        
+        switch self.filteredMainScreenDisplayData.isEmpty {
+        case true:
+            tradingPairName = self.mainScreenDisplayData[index].tradingPairName
+            self.fetchDetaikledKlinesData(for: tradingPairName)
+        case false:
+            tradingPairName = self.filteredMainScreenDisplayData[index].tradingPairName
+            self.fetchDetaikledKlinesData(for: tradingPairName)
+        }
+    }
+    
     // MARK: - Filtered display data updating
     
     func filteredDisplayDataUpdating(searchedText: String) {
@@ -71,7 +100,7 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     }
 }
 
-// MARK: - Private methods
+// MARK: - Fetch exchange data
 
 private extension MainCryptoInfoViewModel {
     func fetchExchangeData() {
@@ -85,5 +114,53 @@ private extension MainCryptoInfoViewModel {
             .store(in: &self.cancellables)
         
         dataLoader.requestExchangeInfoData()
+    }
+    
+    func fetchDetaikledKlinesData(for tradingPairName: String) {
+        let dataLoader = CryptoInfoDataLoader()
+        let helper = CryptoInfoHelper()
+        
+        dataLoader.requestDetailedKlinesData(
+            interval: ChartIntervals.oneHour,
+            limit: ChartRanges.oneWeekForOneHourLimit,
+            tradePairName: helper.createTradePairNameForDetailedKlinesRequest(
+                for: tradingPairName
+            )
+        )
+    }
+}
+
+// MARK: - Handlers
+
+private extension MainCryptoInfoViewModel {
+    func handleDetailedKlinesData(for detailedKlinesData: [KlinesModel], index: Int) {
+        let services = Services()
+
+        switch self.filteredMainScreenDisplayData.isEmpty {
+        case true:
+            let tradingPairPriceDailyChangeInPercents = self.mainScreenDisplayData[index].tradingPairPriceDailyChangeInPercents
+            let detailedChartData = services.createChartData(
+                for: detailedKlinesData,
+                with: tradingPairPriceDailyChangeInPercents
+            )
+            let detailedDisplayData = services.createDetailedDisplayData(
+                for: self.mainScreenDisplayData[index],
+                and: detailedChartData
+            )
+            
+            self.selectedCellDetailedDataIsReadyPublisher.send(detailedDisplayData)
+        case false:
+            let tradingPairPriceDailyChangeInPercents = self.filteredMainScreenDisplayData[index].tradingPairPriceDailyChangeInPercents
+            let detailedChartData = services.createChartData(
+                for: detailedKlinesData,
+                with: tradingPairPriceDailyChangeInPercents
+            )
+            let detailedDisplayData = services.createDetailedDisplayData(
+                for: self.filteredMainScreenDisplayData[index],
+                and: detailedChartData
+            )
+            
+            self.selectedCellDetailedDataIsReadyPublisher.send(detailedDisplayData)
+        }
     }
 }
