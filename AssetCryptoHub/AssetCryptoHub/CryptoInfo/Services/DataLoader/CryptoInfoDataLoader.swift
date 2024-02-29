@@ -23,6 +23,11 @@ final class CryptoInfoDataLoader: CryptoInfoDataLoadable {
     var anyDetailedKlinesDataIsReadyForViewPublisher: AnyPublisher<[KlinesModel], Never> {
         self.detailedKlinesDataIsReadyForViewPublisher.eraseToAnyPublisher()
     }
+    
+    private let networkErrorMessagePublisher = PassthroughSubject<Error, Never>()
+    var anyNetworkErrorMessagePublisher: AnyPublisher<Error, Never> {
+        self.networkErrorMessagePublisher.eraseToAnyPublisher()
+    }
 }
     
     // MARK: - Fetch Data
@@ -45,11 +50,11 @@ extension CryptoInfoDataLoader {
             catch let error {
                 switch error {
                 case NetworkError.invalidURL:
-                    print(error.localizedDescription)
+                    self.networkErrorMessagePublisher.send(error)
                 case NetworkError.invalidResponse:
-                    print(error.localizedDescription)
+                    self.networkErrorMessagePublisher.send(error)
                 case NetworkError.statusCode(Int.min...Int.max):
-                    print(error.localizedDescription)
+                    self.networkErrorMessagePublisher.send(error)
                 default:
                     break
                 }
@@ -89,11 +94,11 @@ extension CryptoInfoDataLoader {
                     catch let error {
                         switch error {
                         case NetworkError.invalidURL:
-                            print(error.localizedDescription)
+                            self.networkErrorMessagePublisher.send(error)
                         case NetworkError.invalidResponse:
-                            print(error.localizedDescription)
+                            self.networkErrorMessagePublisher.send(error)
                         case NetworkError.statusCode(Int.min...Int.max):
-                            print(error.localizedDescription)
+                            self.networkErrorMessagePublisher.send(error)
                         default:
                             break
                         }
@@ -161,11 +166,11 @@ extension CryptoInfoDataLoader {
                     catch let error {
                         switch error {
                         case NetworkError.invalidURL:
-                            print(error.localizedDescription)
+                            self.networkErrorMessagePublisher.send(error)
                         case NetworkError.invalidResponse:
-                            print(error.localizedDescription)
+                            self.networkErrorMessagePublisher.send(error)
                         case NetworkError.statusCode(Int.min...Int.max):
-                            print(error.localizedDescription)
+                            self.networkErrorMessagePublisher.send(error)
                         default:
                             break
                         }
@@ -199,11 +204,11 @@ extension CryptoInfoDataLoader {
             catch let error {
                 switch error {
                 case NetworkError.invalidURL:
-                    print(error.localizedDescription)
+                    self.networkErrorMessagePublisher.send(error)
                 case NetworkError.invalidResponse:
-                    print(error.localizedDescription)
+                    self.networkErrorMessagePublisher.send(error)
                 case NetworkError.statusCode(Int.min...Int.max):
-                    print(error.localizedDescription)
+                    self.networkErrorMessagePublisher.send(error)
                 default:
                     break
                 }
