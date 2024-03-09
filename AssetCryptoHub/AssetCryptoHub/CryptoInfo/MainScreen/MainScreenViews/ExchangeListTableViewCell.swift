@@ -67,6 +67,18 @@ final class ExchangeListTableViewCell: UITableViewCell {
     
     // MARK: - Lifecycle
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.tradePairNameLabel.text = nil
+        self.tradePairCurrentPriceLabel.text = nil
+        self.tradePairDailyChangeLabel.text = nil
+        
+        self.tradePairChartView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -115,11 +127,6 @@ final class ExchangeListTableViewCell: UITableViewCell {
         self.tradePairCurrentPriceLabel.text = mainCryptoInfoDisplayDataModel.tradingPairPrice
         self.tradePairDailyChangeLabel.text = mainCryptoInfoDisplayDataModel.tradingPairPriceDailyChangeInPercents
         self.setPriceChangedTextColor(mainCryptoInfoDisplayDataModel.tradingPairChartData.isRaised)
-        
-        self.tradePairChartView.subviews.forEach { subview in
-            subview.removeFromSuperview()
-        }
-
         self.setupChartView(chartData: mainCryptoInfoDisplayDataModel.tradingPairChartData)
     }
 }
