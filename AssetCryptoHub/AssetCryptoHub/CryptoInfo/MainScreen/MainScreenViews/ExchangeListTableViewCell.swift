@@ -153,11 +153,10 @@ private extension ExchangeListTableViewCell {
 
 private extension ExchangeListTableViewCell {
     func setPriceChangedTextColor(_ isRased: Bool) {
-        switch isRased {
-        case true:
+        if isRased {
             self.tradePairCurrentPriceLabel.textColor = ColorsSet.priceChangedColorGreen
             self.tradePairDailyChangeLabel.textColor = ColorsSet.priceChangedColorGreen
-        case false:
+        } else {
             self.tradePairCurrentPriceLabel.textColor = ColorsSet.priceChangedColorRed
             self.tradePairDailyChangeLabel.textColor = ColorsSet.priceChangedColorRed
         }
