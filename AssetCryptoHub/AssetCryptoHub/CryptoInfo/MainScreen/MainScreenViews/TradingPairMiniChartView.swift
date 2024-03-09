@@ -51,19 +51,14 @@ struct TradingPairMiniChartView: View {
 
 private extension TradingPairMiniChartView {
     func setMainColor(_ isRased: Bool) -> Color {
-        switch isRased {
-        case true:
-            return ColorsSet.chartColorGreen
-        case false:
-            return ColorsSet.chartColorRed
-        }
+        return isRased
+        ? ColorsSet.chartColorGreen
+        : ColorsSet.chartColorRed
     }
     
     func setGradientColor(_ isRased: Bool) -> [Color] {
-        if isRased {
-            return ColorsSet.chartColorGreenGradient
-        } else {
-            return ColorsSet.chartColorRedGradient
-        }
+        return isRased
+        ? ColorsSet.chartColorGreenGradient
+        : ColorsSet.chartColorRedGradient
     }
 }

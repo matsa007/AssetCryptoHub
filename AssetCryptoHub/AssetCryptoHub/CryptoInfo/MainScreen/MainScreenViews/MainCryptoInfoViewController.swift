@@ -235,12 +235,9 @@ private extension MainCryptoInfoViewController {
 
 extension MainCryptoInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch self.viewModel.filteredMainScreenDisplayData.isEmpty {
-        case true:
-            return self.viewModel.mainScreenDisplayData.count
-        case false:
-            return self.viewModel.filteredMainScreenDisplayData.count
-        }
+        return self.viewModel.filteredMainScreenDisplayData.isEmpty
+        ? self.viewModel.mainScreenDisplayData.count
+        : self.viewModel.filteredMainScreenDisplayData.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -254,16 +251,12 @@ extension MainCryptoInfoViewController: UITableViewDataSource {
             for: indexPath
         ) as? ExchangeListTableViewCell else { return UITableViewCell() }
         
-        switch self.viewModel.filteredMainScreenDisplayData.isEmpty {
-        case true:
-            let tradePairDailyData = self.viewModel.mainScreenDisplayData[indexPath.row]
-            cell.setCellDisplayData(mainCryptoInfoDisplayDataModel: tradePairDailyData)
-            return cell
-        case false:
-            let tradePairDailyData = self.viewModel.filteredMainScreenDisplayData[indexPath.row]
-            cell.setCellDisplayData(mainCryptoInfoDisplayDataModel: tradePairDailyData)
-            return cell
-        }
+        let tradePairDailyData = self.viewModel.filteredMainScreenDisplayData.isEmpty
+        ? self.viewModel.mainScreenDisplayData[indexPath.row]
+        : self.viewModel.filteredMainScreenDisplayData[indexPath.row]
+        
+        cell.setCellDisplayData(mainCryptoInfoDisplayDataModel: tradePairDailyData)
+        return cell
     }
 }
 

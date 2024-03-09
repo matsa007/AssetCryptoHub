@@ -152,21 +152,17 @@ private extension MainCryptoInfoViewModel {
     }
     
     func handleTableViewRowSelected(for index: Int) {
-        switch self.filteredMainScreenDisplayData.isEmpty {
-        case true:
-            let tradingPairName = self.mainScreenDisplayData[index].tradingPairName
-            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
-        case false:
-            let tradingPairName = self.filteredMainScreenDisplayData[index].tradingPairName
-            self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
-        }
+        let tradingPairName = self.filteredMainScreenDisplayData.isEmpty
+        ? self.mainScreenDisplayData[index].tradingPairName
+        : self.filteredMainScreenDisplayData[index].tradingPairName
+        
+        self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
     }
     
     func handleDetailedKlinesData(for detailedKlinesData: [KlinesModel], index: Int) {
         let services = Services()
-
-        switch self.filteredMainScreenDisplayData.isEmpty {
-        case true:
+        
+        if self.filteredMainScreenDisplayData.isEmpty {
             let tradingPairPriceDailyChangeInPercents = self.mainScreenDisplayData[index].tradingPairPriceDailyChangeInPercents
             let detailedChartData = services.createChartData(
                 for: detailedKlinesData,
@@ -178,7 +174,7 @@ private extension MainCryptoInfoViewModel {
             )
             
             self.selectedCellDetailedDataIsReadyPublisher.send(detailedDisplayData)
-        case false:
+        } else {
             let tradingPairPriceDailyChangeInPercents = self.filteredMainScreenDisplayData[index].tradingPairPriceDailyChangeInPercents
             let detailedChartData = services.createChartData(
                 for: detailedKlinesData,
