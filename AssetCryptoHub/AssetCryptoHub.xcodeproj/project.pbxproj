@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		495018562B9CAEB30011462D /* SizeCoefficients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495018552B9CAEB30011462D /* SizeCoefficients.swift */; };
 		495716DB2B8FB58F00A0E15E /* FontParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716DA2B8FB58F00A0E15E /* FontParameters.swift */; };
 		495716DD2B8FB7F600A0E15E /* TradingPairMiniChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716DC2B8FB7F600A0E15E /* TradingPairMiniChartView.swift */; };
 		495716DF2B8FB84600A0E15E /* ChartAxisNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495716DE2B8FB84600A0E15E /* ChartAxisNames.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		00991A43C45615680D679D64 /* Pods-AssetCryptoHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.debug.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.debug.xcconfig"; sourceTree = "<group>"; };
+		495018552B9CAEB30011462D /* SizeCoefficients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCoefficients.swift; sourceTree = "<group>"; };
 		495716DA2B8FB58F00A0E15E /* FontParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontParameters.swift; sourceTree = "<group>"; };
 		495716DC2B8FB7F600A0E15E /* TradingPairMiniChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingPairMiniChartView.swift; sourceTree = "<group>"; };
 		495716DE2B8FB84600A0E15E /* ChartAxisNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAxisNames.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				495716DA2B8FB58F00A0E15E /* FontParameters.swift */,
 				495716DE2B8FB84600A0E15E /* ChartAxisNames.swift */,
 				49A0C1AA2B91205900E81254 /* ButtonNames.swift */,
+				495018552B9CAEB30011462D /* SizeCoefficients.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				49C302022B8BF18D00BDAE9E /* Services.swift in Sources */,
 				49C301F82B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift in Sources */,
 				49C301E72B8BC95400BDAE9E /* NetworkManager.swift in Sources */,
+				495018562B9CAEB30011462D /* SizeCoefficients.swift in Sources */,
 				49C301EC2B8BCD6100BDAE9E /* TickersDailyInfoModel.swift in Sources */,
 				49C301FE2B8BF07900BDAE9E /* MainScreenChartData.swift in Sources */,
 				49C301F22B8BD1C900BDAE9E /* MainCryptoInfoViewModelProtocol.swift in Sources */,

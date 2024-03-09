@@ -90,10 +90,9 @@ private extension MainCryptoInfoViewController {
     
     func setConstraints() {
         self.exchangeListTableView.snp.makeConstraints {
+            $0.centerX.height.equalToSuperview()
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(self.view.frame.width * (34 / 35))
-            $0.height.equalToSuperview()
+            $0.width.equalTo(self.view.frame.width * SizeCoefficients.exchangeListTableViewWidth)
         }
     }
 }
@@ -245,7 +244,8 @@ extension MainCryptoInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        self.view.frame.height / 15
+        self.view.frame.height
+            .scaled(by: SizeCoefficients.exchangeListTableViewCellHeight)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

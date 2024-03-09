@@ -99,12 +99,12 @@ final class ExchangeListTableViewCell: UITableViewCell {
             $0.edges.equalToSuperview()
         }
         
-        self.tradePairNameView.snp.makeConstraints { make in
-            make.width.equalTo(self.contentView.frame.width / 4)
+        self.tradePairNameView.snp.makeConstraints {
+            $0.width.equalTo(self.contentView.frame.width / SizeCoefficients.tradePairNameViewWidth)
         }
         
-        self.tradePairNameLabel.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
+        self.tradePairNameLabel.snp.makeConstraints {
+            $0.left.top.bottom.equalToSuperview()
         }
     }
     
