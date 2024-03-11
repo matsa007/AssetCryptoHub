@@ -126,8 +126,16 @@ final class ExchangeListTableViewCell: UITableViewCell {
         self.tradePairNameLabel.text = mainCryptoInfoDisplayDataModel.tradingPairName
         self.tradePairCurrentPriceLabel.text = mainCryptoInfoDisplayDataModel.tradingPairPrice
         self.tradePairDailyChangeLabel.text = mainCryptoInfoDisplayDataModel.tradingPairPriceDailyChangeInPercents
-        self.setPriceChangedTextColor(mainCryptoInfoDisplayDataModel.tradingPairChartData.isRaised)
-        self.setupChartView(chartData: mainCryptoInfoDisplayDataModel.tradingPairChartData)
+        
+        if let chartData = mainCryptoInfoDisplayDataModel.tradingPairChartData {
+            self.setPriceChangedTextColor(chartData.isRaised)
+            self.setupChartView(chartData: chartData)
+        } else {
+            let image = UIImage(systemName: ImageNames.blankChart)
+            let imView = UIImageView(image: image)
+            self.tradePairChartView.addSubview(imView)
+            self.setPriceChangedTextColor(mainCryptoInfoDisplayDataModel.tradingPairPriceIsRaised)
+        }
     }
 }
 
