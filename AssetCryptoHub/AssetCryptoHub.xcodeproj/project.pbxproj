@@ -43,7 +43,7 @@
 		49C301F62B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F52B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift */; };
 		49C301F82B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F72B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift */; };
 		49C301FA2B8BF03D00BDAE9E /* ExchangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301F92B8BF03D00BDAE9E /* ExchangeInfo.swift */; };
-		49C301FC2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FB2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift */; };
+		49C301FC2B8BF05100BDAE9E /* DataForKlinesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FB2B8BF05100BDAE9E /* DataForKlinesRequest.swift */; };
 		49C301FE2B8BF07900BDAE9E /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FD2B8BF07900BDAE9E /* ChartData.swift */; };
 		49C302002B8BF0C700BDAE9E /* MainScreenDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301FF2B8BF0C700BDAE9E /* MainScreenDisplayData.swift */; };
 		49C302022B8BF18D00BDAE9E /* MainCryptoInfoServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C302012B8BF18D00BDAE9E /* MainCryptoInfoServices.swift */; };
@@ -92,7 +92,7 @@
 		49C301F52B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoInfoDataLoader.swift; sourceTree = "<group>"; };
 		49C301F72B8BEF8C00BDAE9E /* CryptoInfoDataLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoInfoDataLoadable.swift; sourceTree = "<group>"; };
 		49C301F92B8BF03D00BDAE9E /* ExchangeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeInfo.swift; sourceTree = "<group>"; };
-		49C301FB2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingPairsDailyInfo.swift; sourceTree = "<group>"; };
+		49C301FB2B8BF05100BDAE9E /* DataForKlinesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataForKlinesRequest.swift; sourceTree = "<group>"; };
 		49C301FD2B8BF07900BDAE9E /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		49C301FF2B8BF0C700BDAE9E /* MainScreenDisplayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenDisplayData.swift; sourceTree = "<group>"; };
 		49C302012B8BF18D00BDAE9E /* MainCryptoInfoServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCryptoInfoServices.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				49C301F92B8BF03D00BDAE9E /* ExchangeInfo.swift */,
-				49C301FB2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift */,
+				49C301FB2B8BF05100BDAE9E /* DataForKlinesRequest.swift */,
 				49C301FD2B8BF07900BDAE9E /* ChartData.swift */,
 				49C301FF2B8BF0C700BDAE9E /* MainScreenDisplayData.swift */,
 			);
@@ -506,7 +506,7 @@
 				495716EA2B90C8C400A0E15E /* DetailedCryptoInfoViewModel.swift in Sources */,
 				49C302062B8BF3CE00BDAE9E /* ChartIntervals.swift in Sources */,
 				495716DD2B8FB7F600A0E15E /* TradingPairMiniChartView.swift in Sources */,
-				49C301FC2B8BF05100BDAE9E /* TradingPairsDailyInfo.swift in Sources */,
+				49C301FC2B8BF05100BDAE9E /* DataForKlinesRequest.swift in Sources */,
 				49C301F62B8BEF3700BDAE9E /* CryptoInfoDataLoader.swift in Sources */,
 				495716DF2B8FB84600A0E15E /* ChartAxisNames.swift in Sources */,
 				49C301DE2B8BB0DE00BDAE9E /* ColorsSet.swift in Sources */,

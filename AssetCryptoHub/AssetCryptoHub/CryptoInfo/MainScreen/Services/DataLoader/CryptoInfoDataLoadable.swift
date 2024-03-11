@@ -14,5 +14,5 @@ protocol CryptoInfoDataLoadable: AnyObject {
     
     func requestExchangeInfoData()
     func requestTraidingPairsDailyInfoData(_ traidingPairsList: [ExhangeInfo]) async
-    func requestKlinesData(tradingPairsDailyInfo: [TradingPairsDailyInfo], interval: ChartIntervals, limit: ChartRanges) async
+    func requestKlinesData(dataForKlinesRequest: [DataForKlinesRequest], interval: ChartIntervals, limit: ChartRanges) async
 }
