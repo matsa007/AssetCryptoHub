@@ -10,4 +10,5 @@ import Foundation
 enum Titles {
     static let cryptoInfoTitle = "Котировки"
     static let portfolioTitle = "Портфели"
+    static let refreshControlTitle = "Котировки обновляются ..."
 }

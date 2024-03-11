@@ -18,12 +18,14 @@ protocol MainCryptoInfoViewModelProtocol: AnyObject {
     var anyFilteredMainScreenDisplayDataIsUpdatedPublisher: AnyPublisher<Void, Never> { get }
     var anySearchButtonTappedPublisher: AnyPublisher<Void, Never> { get }
     var anySearchBarCancelButtonTappedPublisher: AnyPublisher<Void, Never> { get }
+    var anyRefreshControlActivatedPublisher: AnyPublisher<Void, Never> { get }
     var anySelectedCellDataIsReadyPublisher: AnyPublisher<MainScreenDisplayData, Never> { get }
     var anyNetworkErrorAlertPublisher: AnyPublisher<Error, Never> { get }
 
     func readyForDisplay()
     func searchButtonTapped()
     func searchBarCancelButtonTapped()
+    func refreshControlActivated()
     func tableViewRowSelected(index: Int)
     func filteredDisplayDataUpdating(searchedText: String)
 }

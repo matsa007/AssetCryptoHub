@@ -47,6 +47,11 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
         self.searchBarCancelButtonTappedPublisher.eraseToAnyPublisher()
     }
     
+    private let refreshControlActivatedPublisher = PassthroughSubject<Void, Never>()
+    var anyRefreshControlActivatedPublisher: AnyPublisher<Void, Never> {
+        self.refreshControlActivatedPublisher.eraseToAnyPublisher()
+    }
+    
     private let selectedCellDataIsReadyPublisher = PassthroughSubject<MainScreenDisplayData, Never>()
     var anySelectedCellDataIsReadyPublisher: AnyPublisher<MainScreenDisplayData, Never> {
         self.selectedCellDataIsReadyPublisher.eraseToAnyPublisher()
@@ -66,7 +71,7 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     // MARK: - Data loading
     
     func readyForDisplay() {
-        self.fetchExchangeData()
+        self.fetchExchangeData(isRefreshControl: false)
     }
     
     // MARK: - User interaction
@@ -77,6 +82,10 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
     
     func searchBarCancelButtonTapped() {
         self.handleSearchBarCancelButtonTapped()
+    }
+    
+    func refreshControlActivated() {
+        self.handleRefreshControlActivated()
     }
     
     func tableViewRowSelected(index: Int) {
@@ -93,11 +102,13 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
 // MARK: - Fetch exchange data
 
 private extension MainCryptoInfoViewModel {
-    func fetchExchangeData() {
+    func fetchExchangeData(isRefreshControl: Bool) {
         let dataLoader = CryptoInfoDataLoader()
         
-        self.spinnerStartViewPublisher.send()
-        
+        if !isRefreshControl {
+            self.spinnerStartViewPublisher.send()
+        }
+            
         dataLoader.anyDisplayDataIsReadyForViewPublisher
             .sink { [weak self] data in
                 guard let self else { return }
@@ -114,8 +125,6 @@ private extension MainCryptoInfoViewModel {
 
         dataLoader.requestExchangeInfoData()
     }
-    
-    
 }
 
 // MARK: - Handlers and actions
@@ -142,6 +151,11 @@ private extension MainCryptoInfoViewModel {
     
     func handleSearchBarCancelButtonTapped() {
         self.searchBarCancelButtonTappedPublisher.send()
+    }
+    
+    func handleRefreshControlActivated() {
+        self.fetchExchangeData(isRefreshControl: true)
+        self.refreshControlActivatedPublisher.send()
     }
     
     func handleTableViewRowSelected(for index: Int) {
