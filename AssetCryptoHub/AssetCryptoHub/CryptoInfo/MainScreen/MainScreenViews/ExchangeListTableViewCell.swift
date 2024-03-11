@@ -134,9 +134,9 @@ final class ExchangeListTableViewCell: UITableViewCell {
 // MARK: - Mini chart UIView creating
 
 private extension ExchangeListTableViewCell {
-    func setupChartView(chartData: MainScreenChartData) {
+    func setupChartView(chartData: ChartData) {
         DispatchQueue.main.async {
-            let controller = UIHostingController(rootView: TradingPairMiniChartView(tradingPairChartDatalist: MainScreenChartData(
+            let controller = UIHostingController(rootView: TradingPairMiniChartView(tradingPairChartDatalist: ChartData(
                 minPrice: chartData.minPrice,
                 maxPrice: chartData.maxPrice,
                 isRaised: chartData.isRaised,

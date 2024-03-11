@@ -9,10 +9,14 @@ import UIKit
 import Combine
 
 protocol DetailedCryptoInfoViewModelProtocol {
-    var detailedData: MainScreenDisplayData { get set }
-    var anyPeriodButtonTappedPublisher: AnyPublisher<UIButton, Never> { get }
     
-    init(detailedData: MainScreenDisplayData)
+    var detailedScreenDisplayData: DetailedScreenDisplayData { get set }
+    var anyPeriodButtonTappedPublisher: AnyPublisher<UIButton, Never> { get }
+    var anyDetailedChartDataIsReadyPublisher: AnyPublisher<Void, Never> { get }
+    var anyNetworkErrorAlertPublisher: AnyPublisher<Error, Never> { get }
+    
+    init(detailedScreenDisplayData: DetailedScreenDisplayData)
     
     func periodButtonTapped(by button: UIButton)
+    func fetchDetaikledKlinesData(for tradingPairName: String, interval: ChartIntervals, limit: ChartRanges)
 }

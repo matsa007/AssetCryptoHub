@@ -11,17 +11,10 @@ import Combine
 final class CryptoInfoDataLoader: CryptoInfoDataLoadable {
     
     // MARK: - Parameters
-    
-    private var displayData = [MainScreenDisplayData]()
-    
+        
     private let displayDataIsReadyForViewPublisher = PassthroughSubject<[MainScreenDisplayData], Never>()
     var anyDisplayDataIsReadyForViewPublisher: AnyPublisher<[MainScreenDisplayData], Never> {
         self.displayDataIsReadyForViewPublisher.eraseToAnyPublisher()
-    }
-    
-    private let detailedKlinesDataIsReadyForViewPublisher = PassthroughSubject<[KlinesModel], Never>()
-    var anyDetailedKlinesDataIsReadyForViewPublisher: AnyPublisher<[KlinesModel], Never> {
-        self.detailedKlinesDataIsReadyForViewPublisher.eraseToAnyPublisher()
     }
     
     private let networkErrorMessagePublisher = PassthroughSubject<Error, Never>()
@@ -34,7 +27,7 @@ final class CryptoInfoDataLoader: CryptoInfoDataLoadable {
     
 extension CryptoInfoDataLoader {
     func requestExchangeInfoData() {
-        let services = Services()
+        let services = MainCryptoInfoServices()
         
         Task {
             do {
@@ -122,20 +115,22 @@ extension CryptoInfoDataLoader {
             
             await self.requestKlinesData(
                 tradingPairsDailyInfo: tradingPairsDailyInfo,
-                interval: ChartIntervals.oneHour,
-                limit: ChartRanges.oneDayForOneHourLimit
+                interval: .oneHour,
+                limit: .oneDayForOneHourLimit
             )
         }
     }
     
-    func requestKlinesData(tradingPairsDailyInfo: [TradingPairsDailyInfo], interval: String, limit: Int) async {
-        let services = Services()
+    func requestKlinesData(tradingPairsDailyInfo: [TradingPairsDailyInfo], interval: ChartIntervals, limit: ChartRanges) async {
+        let services = MainCryptoInfoServices()
+        var displayDataa = [MainScreenDisplayData]()
+        
         await withTaskGroup(of: MainScreenDisplayData.self) { taskGroup in
             tradingPairsDailyInfo.forEach { tradePairInfo in
                 taskGroup.addTask {
                     var displayData = MainScreenDisplayData(
                         tradingPairName: "",
-                        tradingPairChartData: MainScreenChartData(
+                        tradingPairChartData: ChartData(
                             minPrice: 0.0,
                             maxPrice: 0.0,
                             isRaised: false,
@@ -148,10 +143,18 @@ extension CryptoInfoDataLoader {
                     do {
                         let helper = CryptoInfoHelper()
                         let responseData: [KlinesModel] = try await NetworkManager.shared.requestData(
-                            toEndPoint: helper.createBinanceKlinesApiURL(for: tradePairInfo.symbol, interval: interval, limit: limit),
+                            toEndPoint: helper.createBinanceKlinesApiURL(
+                                for: tradePairInfo.symbol,
+                                interval: interval.rawValue,
+                                limit: limit.rawValue
+                            ),
                             httpMethod: .get
                         )
-                        let chartData = services.createChartData(for: responseData, with: tradePairInfo.priceChangePercent)
+                        let chartData = services.createChartData(
+                            for: responseData,
+                            with: tradePairInfo.priceChangePercent
+                        )
+                        
                         displayData = MainScreenDisplayData(
                             tradingPairName: helper.createTradePairViewName(
                                 for: tradePairInfo.baseAsset,
@@ -180,39 +183,9 @@ extension CryptoInfoDataLoader {
             }
             
             for await displayData in taskGroup {
-                self.displayData.append(displayData)
+                displayDataa.append(displayData)
             }
-            self.displayDataIsReadyForViewPublisher.send(self.displayData)
-        }
-    }
-    
-    func requestDetailedKlinesData(interval: String, limit: Int, tradePairName: String) {
-        Task {
-            do {
-                let helper = CryptoInfoHelper()
-                let responseData: [KlinesModel] = try await NetworkManager.shared.requestData(
-                    toEndPoint: helper.createBinanceKlinesApiURL(
-                        for: tradePairName,
-                        interval: interval,
-                        limit: limit
-                    ),
-                    httpMethod: .get
-                )
-                self.detailedKlinesDataIsReadyForViewPublisher.send(responseData)
-            }
-            
-            catch let error {
-                switch error {
-                case NetworkError.invalidURL:
-                    self.networkErrorMessagePublisher.send(error)
-                case NetworkError.invalidResponse:
-                    self.networkErrorMessagePublisher.send(error)
-                case NetworkError.statusCode(Int.min...Int.max):
-                    self.networkErrorMessagePublisher.send(error)
-                default:
-                    break
-                }
-            }
+            self.displayDataIsReadyForViewPublisher.send(displayDataa)
         }
     }
 }

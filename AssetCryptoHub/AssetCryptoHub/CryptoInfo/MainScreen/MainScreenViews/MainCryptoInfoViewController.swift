@@ -155,7 +155,7 @@ private extension MainCryptoInfoViewController {
             }
             .store(in: &self.cancellables)
         
-        self.viewModel.anySelectedCellDetailedDataIsReadyPublisher
+        self.viewModel.anySelectedCellDataIsReadyPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] selectedData in
                 guard let self else { return }
@@ -217,10 +217,16 @@ private extension MainCryptoInfoViewController {
         self.exchangeListTableView.reloadData()
     }
     
-    func handleTableViewRowSelectedData(for detailedData: MainScreenDisplayData) {
+    func handleTableViewRowSelectedData(for selectedMainScreenDisplayData: MainScreenDisplayData) {
         let vc = DetailedCryptoInfoViewController(
             viewModel: DetailedCryptoInfoViewModel(
-                detailedData: detailedData
+                detailedScreenDisplayData: DetailedScreenDisplayData(
+                    tradingPairName: selectedMainScreenDisplayData.tradingPairName,
+                    tradingPairChartData: nil,
+                    tradingPairPrice: selectedMainScreenDisplayData.tradingPairPrice,
+                    tradingPairPriceDailyChangeInPercents: selectedMainScreenDisplayData.tradingPairPriceDailyChangeInPercents,
+                    tradingPairPriceIsRaised: nil
+                )
             )
         )
         self.navigationController?.pushViewController(vc, animated: true)

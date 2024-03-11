@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 final class DetailedCryptoInfoViewController: UIViewController {
     
     // MARK: - Parameters
     
     private let viewModel: DetailedCryptoInfoViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - GUI
     
@@ -169,8 +171,14 @@ final class DetailedCryptoInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.binding()
         self.view.backgroundColor = .blue
-        dump(self.viewModel.detailedData)
+        self.viewModel.fetchDetaikledKlinesData(
+            for: self.viewModel.detailedScreenDisplayData.tradingPairName,
+            interval: .oneHour,
+            limit: .oneWeekForOneHourLimit
+        )
+        dump(self.viewModel.detailedScreenDisplayData.tradingPairName)
     }
     
     override func viewDidLayoutSubviews() {
@@ -189,5 +197,34 @@ final class DetailedCryptoInfoViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        self.cancellables.forEach { $0.cancel() }
+    }
+}
+
+private extension DetailedCryptoInfoViewController {
+    func binding() {
+        self.bindInput()
+        self.bindOutput()
+    }
+    
+    func bindInput() {}
+    
+    func bindOutput() {
+        self.viewModel.anyNetworkErrorAlertPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                guard let self else { return }
+                self.handleShowErrorWithAlert(for: error)
+            }
+            .store(in: &self.cancellables)
+    }
+}
+
+private extension DetailedCryptoInfoViewController {
+    func handleShowErrorWithAlert(for error: Error) {
+        self.alertForError(error)
     }
 }
