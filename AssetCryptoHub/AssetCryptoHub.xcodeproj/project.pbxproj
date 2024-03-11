@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492015CE2B9F27CA00424423 /* DetailedCryptoInfoServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492015CD2B9F27CA00424423 /* DetailedCryptoInfoServices.swift */; };
 		492076F62B9E424800D26E28 /* ErrorTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492076F52B9E424800D26E28 /* ErrorTitles.swift */; };
 		492076FA2B9E57A000D26E28 /* DetailedTradingPairChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492076F92B9E57A000D26E28 /* DetailedTradingPairChartView.swift */; };
-		492076FC2B9E589C00D26E28 /* DetailedCryptoInfoServices in Sources */ = {isa = PBXBuildFile; fileRef = 492076FB2B9E589C00D26E28 /* DetailedCryptoInfoServices */; };
 		495018562B9CAEB30011462D /* SizeCoefficients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495018552B9CAEB30011462D /* SizeCoefficients.swift */; };
 		4950185B2B9CD1AF0011462D /* DetailedCryptoInfoDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950185A2B9CD1AF0011462D /* DetailedCryptoInfoDataLoader.swift */; };
 		4950185D2B9CD6E60011462D /* DetailedCryptoInfoDataLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950185C2B9CD6E60011462D /* DetailedCryptoInfoDataLoadable.swift */; };
@@ -54,9 +54,9 @@
 
 /* Begin PBXFileReference section */
 		00991A43C45615680D679D64 /* Pods-AssetCryptoHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetCryptoHub.debug.xcconfig"; path = "Target Support Files/Pods-AssetCryptoHub/Pods-AssetCryptoHub.debug.xcconfig"; sourceTree = "<group>"; };
+		492015CD2B9F27CA00424423 /* DetailedCryptoInfoServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCryptoInfoServices.swift; sourceTree = "<group>"; };
 		492076F52B9E424800D26E28 /* ErrorTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTitles.swift; sourceTree = "<group>"; };
 		492076F92B9E57A000D26E28 /* DetailedTradingPairChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTradingPairChartView.swift; sourceTree = "<group>"; };
-		492076FB2B9E589C00D26E28 /* DetailedCryptoInfoServices */ = {isa = PBXFileReference; lastKnownFileType = text; path = DetailedCryptoInfoServices; sourceTree = "<group>"; };
 		495018552B9CAEB30011462D /* SizeCoefficients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCoefficients.swift; sourceTree = "<group>"; };
 		4950185A2B9CD1AF0011462D /* DetailedCryptoInfoDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCryptoInfoDataLoader.swift; sourceTree = "<group>"; };
 		4950185C2B9CD6E60011462D /* DetailedCryptoInfoDataLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCryptoInfoDataLoadable.swift; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 		495018572B9CD16D0011462D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				492076FB2B9E589C00D26E28 /* DetailedCryptoInfoServices */,
 				495018592B9CD1980011462D /* DataLoader */,
+				492015CD2B9F27CA00424423 /* DetailedCryptoInfoServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -499,7 +499,6 @@
 				49C301D92B8BADA900BDAE9E /* MainPortfolioViewController.swift in Sources */,
 				49C301E22B8BBDDC00BDAE9E /* CellIdentificators.swift in Sources */,
 				49C301BF2B8B9D6400BDAE9E /* SceneDelegate.swift in Sources */,
-				492076FC2B9E589C00D26E28 /* DetailedCryptoInfoServices in Sources */,
 				49C301E02B8BB0FD00BDAE9E /* ImageNames.swift in Sources */,
 				4950185D2B9CD6E60011462D /* DetailedCryptoInfoDataLoadable.swift in Sources */,
 				49C301EA2B8BCD2C00BDAE9E /* ExchangeInfoModel.swift in Sources */,
@@ -519,6 +518,7 @@
 				495716E22B90BCA300A0E15E /* CryptoInfoHelper.swift in Sources */,
 				495716DB2B8FB58F00A0E15E /* FontParameters.swift in Sources */,
 				49C301DC2B8BB09D00BDAE9E /* Titles.swift in Sources */,
+				492015CE2B9F27CA00424423 /* DetailedCryptoInfoServices.swift in Sources */,
 				495716E82B90C81D00A0E15E /* DetailedCryptoInfoViewController.swift in Sources */,
 				492076FA2B9E57A000D26E28 /* DetailedTradingPairChartView.swift in Sources */,
 			);
