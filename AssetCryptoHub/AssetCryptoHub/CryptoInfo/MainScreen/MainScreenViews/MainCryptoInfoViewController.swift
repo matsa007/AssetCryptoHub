@@ -40,6 +40,11 @@ final class MainCryptoInfoViewController: UIViewController {
         return view
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        return refreshControl
+    }()
+    
     // MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -91,6 +96,7 @@ private extension MainCryptoInfoViewController {
         self.setNavBar()
         self.setSearchItem()
         self.setExchangeListTableView()
+        self.setRefreshControl()
     }
     
     func setConstraints() {
@@ -121,6 +127,29 @@ private extension MainCryptoInfoViewController {
         self.exchangeListTableView.register(
             ExchangeListTableViewCell.self,
             forCellReuseIdentifier: CellIdentificators.mainCryptoInfo
+        )
+    }
+    
+    func setRefreshControl() {
+        self.exchangeListTableView.refreshControl = self.refreshControl
+        self.refreshControl.addTarget(
+            self,
+            action: #selector(self.refreshControlActivated),
+            for: .valueChanged
+        )
+        
+        let font = UIFont(name: FontNames.bold, size: FontSizes.regular)
+        let color = ColorsSet.refreshControlColor
+        self.refreshControl.tintColor = color
+        
+        let attributes = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: color
+        ]
+        
+        self.refreshControl.attributedTitle = NSAttributedString(
+            string: Titles.refreshControlTitle,
+            attributes: attributes as [NSAttributedString.Key : Any]
         )
     }
 }
@@ -220,12 +249,17 @@ private extension MainCryptoInfoViewController {
         self.viewModel.searchButtonTapped()
     }
     
+    @objc private func refreshControlActivated() {
+        self.viewModel.refreshControlActivated()
+    }
+    
     func handleStartSpinnerAnimation() {
         self.spinnerView = self.createSpinnerView(isFooterView: false)
         self.view.addSubview(self.spinnerView)
     }
     
     func handleStopSpinnerAnimation() {
+        self.refreshControl.endRefreshing()
         self.spinnerView.removeFromSuperview()
     }
     
