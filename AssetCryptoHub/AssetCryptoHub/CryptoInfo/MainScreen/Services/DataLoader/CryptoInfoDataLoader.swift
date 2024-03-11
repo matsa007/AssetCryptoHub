@@ -56,6 +56,10 @@ extension CryptoInfoDataLoader {
     }
     
     func requestTraidingPairsDailyInfoData(_ traidingPairsList: [ExhangeInfo]) async {
+        let helper = CryptoInfoHelper()
+        let services = MainCryptoInfoServices()
+        var displayData = [MainScreenDisplayData]()
+
         await withTaskGroup(of: TradingPairsDailyInfo.self) { taskGroup in
             traidingPairsList.forEach { tradePair in
                 taskGroup.addTask {
@@ -111,7 +115,26 @@ extension CryptoInfoDataLoader {
                     priceChange: dailyInfo.priceChange,
                     priceChangePercent: dailyInfo.priceChangePercent
                 ))
+                
+                let isRaised = dailyInfo.priceChangePercent.first == "-"
+                ? false
+                : true
+                
+                displayData.append(
+                    MainScreenDisplayData(
+                        tradingPairName: helper.createTradePairViewName(
+                            for: dailyInfo.baseAsset,
+                            and: dailyInfo.quoteAsset
+                        ),
+                        tradingPairChartData: nil,
+                        tradingPairPrice: services.updatePrice(dailyInfo.lastPrice),
+                        tradingPairPriceDailyChangeInPercents: helper.addPercentSign(for: dailyInfo.priceChangePercent),
+                        tradingPairPriceIsRaised: isRaised
+                    )
+                )
             }
+            
+            self.displayDataIsReadyForViewPublisher.send(displayData)
             
             await self.requestKlinesData(
                 tradingPairsDailyInfo: tradingPairsDailyInfo,
@@ -123,7 +146,7 @@ extension CryptoInfoDataLoader {
     
     func requestKlinesData(tradingPairsDailyInfo: [TradingPairsDailyInfo], interval: ChartIntervals, limit: ChartRanges) async {
         let services = MainCryptoInfoServices()
-        var displayDataa = [MainScreenDisplayData]()
+        var displayData = [MainScreenDisplayData]()
         
         await withTaskGroup(of: MainScreenDisplayData.self) { taskGroup in
             tradingPairsDailyInfo.forEach { tradePairInfo in
@@ -163,7 +186,8 @@ extension CryptoInfoDataLoader {
                             tradingPairChartData: chartData,
                             tradingPairPrice: services.updatePrice(tradePairInfo.lastPrice),
                             tradingPairPriceDailyChangeInPercents: helper.addPercentSign(for: tradePairInfo.priceChangePercent),
-                            tradingPairPriceIsRaised: chartData.isRaised)
+                            tradingPairPriceIsRaised: chartData.isRaised
+                        )
                     }
                     
                     catch let error {
@@ -182,10 +206,10 @@ extension CryptoInfoDataLoader {
                 }
             }
             
-            for await displayData in taskGroup {
-                displayDataa.append(displayData)
+            for await data in taskGroup {
+                displayData.append(data)
             }
-            self.displayDataIsReadyForViewPublisher.send(displayDataa)
+            self.displayDataIsReadyForViewPublisher.send(displayData)
         }
     }
 }

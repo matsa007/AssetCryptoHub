@@ -10,4 +10,5 @@ import Foundation
 enum ImageNames {
     static let priceQuotes = "list.bullet.rectangle"
     static let portfolio = "list.bullet.rectangle"
+    static let blankChart = "chart.line.uptrend.xyaxis"
 }
