@@ -32,20 +32,24 @@ extension UIViewController {
         }
     }
     
-    func createSpinnerFooter() -> UIView {
-        let footerView = UIView(
+    func createSpinnerView(isFooterView: Bool) -> UIView {
+        let spinnerViewHeight = isFooterView
+        ? SizeCoefficients.spinnerFooterHeight
+        : self.view.frame.height
+        
+        let spinnerView = UIView(
             frame: CGRect(
                 x: 0,
                 y: 0,
                 width: self.view.frame.width,
-                height: 100
+                height: spinnerViewHeight
             )
         )
         let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        spinner.color = .white
-        footerView.addSubview(spinner)
+        spinner.center = spinnerView.center
+        spinner.color = .black
+        spinnerView.addSubview(spinner)
         spinner.startAnimating()
-        return footerView
+        return spinnerView
     }
 }

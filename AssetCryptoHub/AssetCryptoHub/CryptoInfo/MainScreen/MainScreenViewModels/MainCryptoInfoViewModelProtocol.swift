@@ -12,6 +12,8 @@ protocol MainCryptoInfoViewModelProtocol: AnyObject {
     var mainScreenDisplayData: [MainScreenDisplayData] { get set }
     var filteredMainScreenDisplayData: [MainScreenDisplayData] { get set }
     
+    var anySpinnerStartViewPublisher: AnyPublisher<Void, Never> { get }
+    var anySpinnerStopViewPublisher: AnyPublisher<Void, Never> { get }
     var anyMainScreenDisplayDataIsReadyForViewPublisher: AnyPublisher<Void, Never> { get }
     var anyFilteredMainScreenDisplayDataIsUpdatedPublisher: AnyPublisher<Void, Never> { get }
     var anySearchButtonTappedPublisher: AnyPublisher<Void, Never> { get }

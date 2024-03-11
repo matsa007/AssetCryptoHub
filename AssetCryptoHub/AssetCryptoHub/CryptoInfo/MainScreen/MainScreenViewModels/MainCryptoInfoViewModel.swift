@@ -17,6 +17,16 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
 
     private var cancellables: Set<AnyCancellable> = []
     
+    private let spinnerStartViewPublisher = PassthroughSubject<Void, Never>()
+    var anySpinnerStartViewPublisher: AnyPublisher<Void, Never> {
+        self.spinnerStartViewPublisher.eraseToAnyPublisher()
+    }
+    
+    private let spinnerStopViewPublisher = PassthroughSubject<Void, Never>()
+    var anySpinnerStopViewPublisher: AnyPublisher<Void, Never> {
+        self.spinnerStopViewPublisher.eraseToAnyPublisher()
+    }
+    
     private let mainScreenDisplayDataIsReadyForViewPublisher = PassthroughSubject<Void, Never>()
     var anyMainScreenDisplayDataIsReadyForViewPublisher: AnyPublisher<Void, Never> {
         self.mainScreenDisplayDataIsReadyForViewPublisher.eraseToAnyPublisher()
@@ -85,6 +95,9 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
 private extension MainCryptoInfoViewModel {
     func fetchExchangeData() {
         let dataLoader = CryptoInfoDataLoader()
+        
+        self.spinnerStartViewPublisher.send()
+        
         dataLoader.anyDisplayDataIsReadyForViewPublisher
             .sink { [weak self] data in
                 guard let self else { return }
@@ -110,6 +123,7 @@ private extension MainCryptoInfoViewModel {
 private extension MainCryptoInfoViewModel {
     func handleDisplayData(for data: [MainScreenDisplayData]) {
         self.mainScreenDisplayData = data
+        self.spinnerStopViewPublisher.send()
         self.mainScreenDisplayDataIsReadyForViewPublisher.send()
     }
     

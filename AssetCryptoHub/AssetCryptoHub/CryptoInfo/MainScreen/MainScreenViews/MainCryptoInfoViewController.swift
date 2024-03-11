@@ -35,6 +35,11 @@ final class MainCryptoInfoViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var spinnerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     // MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -165,6 +170,23 @@ private extension MainCryptoInfoViewController {
     }
     
     func bindOutput() {
+        self.viewModel.anySpinnerStartViewPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.handleStartSpinnerAnimation()
+            }
+            .store(in: &self.cancellables)
+        
+        self.viewModel.anySpinnerStopViewPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.handleStopSpinnerAnimation()
+            }
+            .store(in: &self.cancellables)
+        
+        
         self.viewModel.anyMainScreenDisplayDataIsReadyForViewPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -196,6 +218,15 @@ private extension MainCryptoInfoViewController {
 private extension MainCryptoInfoViewController {
     @objc func searchButtonTapped() {
         self.viewModel.searchButtonTapped()
+    }
+    
+    func handleStartSpinnerAnimation() {
+        self.spinnerView = self.createSpinnerView(isFooterView: false)
+        self.view.addSubview(self.spinnerView)
+    }
+    
+    func handleStopSpinnerAnimation() {
+        self.spinnerView.removeFromSuperview()
     }
     
     func handleSearchBarTextChanged(_ searchedText: String) {
