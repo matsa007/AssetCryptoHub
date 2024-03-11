@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TradingPairsDailyInfo {
+struct DataForKlinesRequest {
     let symbol: String
     let baseAsset: String
     let quoteAsset: String

@@ -11,7 +11,8 @@ import Combine
 final class CryptoInfoDataLoader: CryptoInfoDataLoadable {
     
     // MARK: - Parameters
-        
+    
+    private var displayData = [MainScreenDisplayData]()
     private let displayDataIsReadyForViewPublisher = PassthroughSubject<[MainScreenDisplayData], Never>()
     var anyDisplayDataIsReadyForViewPublisher: AnyPublisher<[MainScreenDisplayData], Never> {
         self.displayDataIsReadyForViewPublisher.eraseToAnyPublisher()
@@ -58,12 +59,11 @@ extension CryptoInfoDataLoader {
     func requestTraidingPairsDailyInfoData(_ traidingPairsList: [ExhangeInfo]) async {
         let helper = CryptoInfoHelper()
         let services = MainCryptoInfoServices()
-        var displayData = [MainScreenDisplayData]()
 
-        await withTaskGroup(of: TradingPairsDailyInfo.self) { taskGroup in
+        await withTaskGroup(of: DataForKlinesRequest.self) { taskGroup in
             traidingPairsList.forEach { tradePair in
                 taskGroup.addTask {
-                    var dailyInfo = TradingPairsDailyInfo(
+                    var dailyInfo = DataForKlinesRequest(
                         symbol: "",
                         baseAsset: "",
                         quoteAsset: "",
@@ -78,7 +78,7 @@ extension CryptoInfoDataLoader {
                             toEndPoint: helper.createUrlForBinanceTradePairDailyInfo(for: tradePair.symbol),
                             httpMethod: .get
                         )
-                        dailyInfo = TradingPairsDailyInfo(
+                        dailyInfo = DataForKlinesRequest(
                             symbol: tradePair.symbol,
                             baseAsset: tradePair.baseAsset,
                             quoteAsset: tradePair.quoteAsset,
@@ -104,10 +104,10 @@ extension CryptoInfoDataLoader {
                 }
             }
             
-            var tradingPairsDailyInfo = [TradingPairsDailyInfo]()
+            var tradingPairsDailyInfo = [DataForKlinesRequest]()
             
             for await dailyInfo in taskGroup {
-                tradingPairsDailyInfo.append(TradingPairsDailyInfo(
+                tradingPairsDailyInfo.append(DataForKlinesRequest(
                     symbol: dailyInfo.symbol,
                     baseAsset: dailyInfo.baseAsset,
                     quoteAsset: dailyInfo.quoteAsset,
@@ -120,7 +120,7 @@ extension CryptoInfoDataLoader {
                 ? false
                 : true
                 
-                displayData.append(
+                self.displayData.append(
                     MainScreenDisplayData(
                         tradingPairName: helper.createTradePairViewName(
                             for: dailyInfo.baseAsset,
@@ -134,22 +134,21 @@ extension CryptoInfoDataLoader {
                 )
             }
             
-            self.displayDataIsReadyForViewPublisher.send(displayData)
+            self.displayDataIsReadyForViewPublisher.send(self.displayData)
             
             await self.requestKlinesData(
-                tradingPairsDailyInfo: tradingPairsDailyInfo,
+                dataForKlinesRequest: tradingPairsDailyInfo,
                 interval: .oneHour,
                 limit: .oneDayForOneHourLimit
             )
         }
     }
     
-    func requestKlinesData(tradingPairsDailyInfo: [TradingPairsDailyInfo], interval: ChartIntervals, limit: ChartRanges) async {
+    func requestKlinesData(dataForKlinesRequest: [DataForKlinesRequest], interval: ChartIntervals, limit: ChartRanges) async {
         let services = MainCryptoInfoServices()
-        var displayData = [MainScreenDisplayData]()
         
         await withTaskGroup(of: MainScreenDisplayData.self) { taskGroup in
-            tradingPairsDailyInfo.forEach { tradePairInfo in
+            dataForKlinesRequest.forEach { tradePairInfo in
                 taskGroup.addTask {
                     var displayData = MainScreenDisplayData(
                         tradingPairName: "",
@@ -206,10 +205,12 @@ extension CryptoInfoDataLoader {
                 }
             }
             
+            self.displayData.removeAll()
+            
             for await data in taskGroup {
-                displayData.append(data)
+                self.displayData.append(data)
             }
-            self.displayDataIsReadyForViewPublisher.send(displayData)
+            self.displayDataIsReadyForViewPublisher.send(self.displayData)
         }
     }
 }
