@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MainScreenChartData {
+struct ChartData {
     var minPrice: Double
     var maxPrice: Double
     var isRaised: Bool

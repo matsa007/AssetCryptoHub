@@ -1,5 +1,5 @@
 //
-//  Services.swift
+//  MainCryptoInfoServices.swift
 //  AssetCryptoHub
 //
 //  Created by Сергей Матвеенко on 26.02.24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Services {
+struct MainCryptoInfoServices {
     func checkForTradingStatusAndUpdate(_ tradePairExchangeInfoData: ExhangeInfoModel) -> [ExhangeInfo] {
         var updatedTradePairsInfoList = [ExhangeInfo]()
 
@@ -28,8 +28,8 @@ struct Services {
         return updatedTradePairsInfoList
     }
     
-    func createChartData(for fetchedData: [KlinesModel], with priceChanged: String) -> MainScreenChartData {
-        var chartData = MainScreenChartData(
+    func createChartData(for fetchedData: [KlinesModel], with priceChanged: String) -> ChartData {
+        var chartData = ChartData(
             minPrice: Double.greatestFiniteMagnitude,
             maxPrice: 0.0,
             isRaised: Bool(),
@@ -52,29 +52,35 @@ struct Services {
             }
             
             chartData.tradingPairChartViewModel.append(TradingPairChartData(
-                openTime: self.dateFormatterFromDouble(timeInDouble: intervalData.openTime),
+                openTime: self.dateFormatterFromDouble(
+                    timeInDouble: intervalData.openTime,
+                    dateFormat: .normalDateFormat
+                ),
                 open: intervalData.open,
                 high: Double(intervalData.high) ?? 0.0,
                 low: Double(intervalData.low) ?? 0.0,
                 close: Double(intervalData.close) ?? 0.0,
                 volume: intervalData.volume,
-                closeTime: self.dateFormatterFromDouble(timeInDouble: intervalData.closeTime)
+                closeTime: self.dateFormatterFromDouble(
+                    timeInDouble: intervalData.closeTime,
+                    dateFormat: .normalDateFormat
+                )
             ))
         }
         return chartData
     }
     
-    private func dateFormatterFromDouble(timeInDouble: Double, timeInString: String? = nil) -> String {
+    private func dateFormatterFromDouble(timeInDouble: Double, timeInString: String? = nil, dateFormat: DateFormats) -> String {
         if let time = timeInString {
             let serverDate = Date(timeIntervalSince1970: Double(Double(time) ?? 0.0 / 1000))
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+            dateFormatter.dateFormat = dateFormat.rawValue
             let formattedDate = dateFormatter.string(from: serverDate)
             return formattedDate
         } else {
             let serverDate = Date(timeIntervalSince1970: Double(timeInDouble/1000))
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+            dateFormatter.dateFormat = dateFormat.rawValue
             let formattedDate = dateFormatter.string(from: serverDate)
             return formattedDate
         }
@@ -91,14 +97,5 @@ struct Services {
             updatedPrice += "0"
         }
         return updatedPrice
-    }
-    
-    func createDetailedDisplayData(for data: MainScreenDisplayData, and detailedChartData: MainScreenChartData) -> MainScreenDisplayData {
-        MainScreenDisplayData(
-            tradingPairName: data.tradingPairName,
-            tradingPairChartData: detailedChartData,
-            tradingPairPrice: data.tradingPairPrice,
-            tradingPairPriceDailyChangeInPercents: data.tradingPairPriceDailyChangeInPercents,
-            tradingPairPriceIsRaised: detailedChartData.isRaised)
     }
 }

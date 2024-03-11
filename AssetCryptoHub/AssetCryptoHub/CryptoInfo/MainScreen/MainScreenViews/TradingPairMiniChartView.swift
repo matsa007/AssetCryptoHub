@@ -13,7 +13,7 @@ struct TradingPairMiniChartView: View {
     
     // MARK: - Parameters
     
-    let tradingPairChartDatalist: MainScreenChartData
+    let tradingPairChartDatalist: ChartData
     
     // MARK: - Chart creating
     

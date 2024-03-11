@@ -37,9 +37,9 @@ final class MainCryptoInfoViewModel: MainCryptoInfoViewModelProtocol {
         self.searchBarCancelButtonTappedPublisher.eraseToAnyPublisher()
     }
     
-    private let selectedCellDetailedDataIsReadyPublisher = PassthroughSubject<MainScreenDisplayData, Never>()
-    var anySelectedCellDetailedDataIsReadyPublisher: AnyPublisher<MainScreenDisplayData, Never> {
-        self.selectedCellDetailedDataIsReadyPublisher.eraseToAnyPublisher()
+    private let selectedCellDataIsReadyPublisher = PassthroughSubject<MainScreenDisplayData, Never>()
+    var anySelectedCellDataIsReadyPublisher: AnyPublisher<MainScreenDisplayData, Never> {
+        self.selectedCellDataIsReadyPublisher.eraseToAnyPublisher()
     }
     
     private let networkErrorAlertPublisher = PassthroughSubject<Error, Never>()
@@ -102,28 +102,7 @@ private extension MainCryptoInfoViewModel {
         dataLoader.requestExchangeInfoData()
     }
     
-    func fetchDetaikledKlinesData(for tradingPairName: String, index: Int) {
-        let dataLoader = CryptoInfoDataLoader()
-        let helper = CryptoInfoHelper()
-        
-        dataLoader.anyDetailedKlinesDataIsReadyForViewPublisher
-            .sink { [weak self] detailedKlinesData in
-                guard let self else { return }
-                self.handleDetailedKlinesData(
-                    for: detailedKlinesData,
-                    index: index
-                )
-            }
-            .store(in: &self.cancellables)
-        
-        dataLoader.requestDetailedKlinesData(
-            interval: ChartIntervals.oneHour,
-            limit: ChartRanges.oneWeekForOneHourLimit,
-            tradePairName: helper.createTradePairNameForDetailedKlinesRequest(
-                for: tradingPairName
-            )
-        )
-    }
+    
 }
 
 // MARK: - Handlers and actions
@@ -152,41 +131,11 @@ private extension MainCryptoInfoViewModel {
     }
     
     func handleTableViewRowSelected(for index: Int) {
-        let tradingPairName = self.filteredMainScreenDisplayData.isEmpty
-        ? self.mainScreenDisplayData[index].tradingPairName
-        : self.filteredMainScreenDisplayData[index].tradingPairName
+        let selectedMainScreenDisplayData = self.filteredMainScreenDisplayData.isEmpty
+        ? self.mainScreenDisplayData[index]
+        : self.filteredMainScreenDisplayData[index]
         
-        self.fetchDetaikledKlinesData(for: tradingPairName, index: index)
-    }
-    
-    func handleDetailedKlinesData(for detailedKlinesData: [KlinesModel], index: Int) {
-        let services = Services()
-        
-        if self.filteredMainScreenDisplayData.isEmpty {
-            let tradingPairPriceDailyChangeInPercents = self.mainScreenDisplayData[index].tradingPairPriceDailyChangeInPercents
-            let detailedChartData = services.createChartData(
-                for: detailedKlinesData,
-                with: tradingPairPriceDailyChangeInPercents
-            )
-            let detailedDisplayData = services.createDetailedDisplayData(
-                for: self.mainScreenDisplayData[index],
-                and: detailedChartData
-            )
-            
-            self.selectedCellDetailedDataIsReadyPublisher.send(detailedDisplayData)
-        } else {
-            let tradingPairPriceDailyChangeInPercents = self.filteredMainScreenDisplayData[index].tradingPairPriceDailyChangeInPercents
-            let detailedChartData = services.createChartData(
-                for: detailedKlinesData,
-                with: tradingPairPriceDailyChangeInPercents
-            )
-            let detailedDisplayData = services.createDetailedDisplayData(
-                for: self.filteredMainScreenDisplayData[index],
-                and: detailedChartData
-            )
-            
-            self.selectedCellDetailedDataIsReadyPublisher.send(detailedDisplayData)
-        }
+        self.selectedCellDataIsReadyPublisher.send(selectedMainScreenDisplayData)
     }
     
     func handleAlertForNetworkError(for error: Error) {

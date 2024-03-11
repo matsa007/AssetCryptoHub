@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum ChartIntervals {
-    static let oneHour = "1h"
-    static let oneMinute = "1m"
+enum ChartIntervals: String {
+    case oneHour = "1h"
+    case oneMinute = "1m"
 }
 
-enum ChartRanges {
-    static let oneDayForOneHourLimit = 24
-    static let oneWeekForOneHourLimit = 168
+enum ChartRanges: Int {
+    case oneDayForOneHourLimit = 24
+    case oneWeekForOneHourLimit = 168
 }

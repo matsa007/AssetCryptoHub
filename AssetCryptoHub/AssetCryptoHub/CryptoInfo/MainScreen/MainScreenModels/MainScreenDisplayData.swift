@@ -9,17 +9,8 @@ import Foundation
 
 struct MainScreenDisplayData {
     let tradingPairName: String
-    let tradingPairChartData: MainScreenChartData
+    let tradingPairChartData: ChartData
     let tradingPairPrice: String
     let tradingPairPriceDailyChangeInPercents: String
     let tradingPairPriceIsRaised: Bool
 }
-
-struct DetailedScreenDisplayData {
-    let tradingPairName: String
-    let tradingPairChartData: MainScreenChartData
-    let tradingPairPrice: String
-    let tradingPairPriceDailyChangeInPercents: String
-    let tradingPairPriceIsRaised: Bool
-}
-
